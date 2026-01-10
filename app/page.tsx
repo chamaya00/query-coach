@@ -73,11 +73,12 @@ export default function Home() {
         }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        throw new Error("Failed to get feedback");
+        throw new Error(data.error || "Failed to get feedback");
       }
 
-      const data = await res.json();
       setResponse(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
