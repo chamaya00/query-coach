@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import path from "path";
 import { generateCompletion } from "./anthropic";
 import { executeSQL } from "./sql-executor";
-import { CoachRequest, CoachResponse } from "./types";
+import { CoachRequest, CoachResponse, HintRequest, HintResponse } from "./types";
 
 function loadAgentFile(filename: string): string {
   const filePath = path.join(process.cwd(), "agents", "querycoach", filename);
@@ -105,5 +105,45 @@ export async function getQueryFeedback(
     feedback,
     queryResult,
     executionTimeMs: Date.now() - startTime,
+  };
+}
+
+function loadHintAgentFile(): string {
+  const filePath = path.join(process.cwd(), "agents", "hintgenerator", "AGENT.md");
+  return readFileSync(filePath, "utf-8");
+}
+
+function buildHintUserMessage(request: HintRequest): string {
+  return `
+<schema>
+${request.schema}
+</schema>
+
+<question>${request.question}</question>
+
+<user_level>${request.userLevel}</user_level>
+
+Generate a hint SQL query for this question.
+`.trim();
+}
+
+export async function generateHintQuery(
+  request: HintRequest
+): Promise<HintResponse> {
+  const systemPrompt = loadHintAgentFile();
+  const userMessage = buildHintUserMessage(request);
+
+  // Get hint from Claude
+  const hintQuery = await generateCompletion(systemPrompt, userMessage, 500);
+
+  // Clean up the response - remove markdown code blocks if present
+  const cleanedHint = hintQuery
+    .replace(/^```sql\n?/i, "")
+    .replace(/^```\n?/, "")
+    .replace(/\n?```$/g, "")
+    .trim();
+
+  return {
+    hintQuery: cleanedHint,
   };
 }

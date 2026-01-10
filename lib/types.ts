@@ -21,6 +21,16 @@ export interface QueryResult {
   rowCount?: number;
 }
 
+export interface HintRequest {
+  schema: string;
+  question: string;
+  userLevel: UserLevel;
+}
+
+export interface HintResponse {
+  hintQuery: string;
+}
+
 export interface TestCase {
   id: string;
   name: string;
