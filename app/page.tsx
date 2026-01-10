@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SQLEditor from "@/components/SQLEditor";
 import TableBrowser from "@/components/TableBrowser";
 import FeedbackPanel from "@/components/FeedbackPanel";
@@ -106,18 +106,60 @@ INSERT INTO order_items (id, order_id, product_id, quantity, unit_price) VALUES
 
 const DEFAULT_QUESTION = "Find the total amount spent by each customer";
 
-const DEFAULT_QUERY = `SELECT customers.name, SUM(orders.total_amount)
-FROM customers, orders
-GROUP BY customers.name`;
-
 export default function Home() {
   const [schema, setSchema] = useState(DEFAULT_SCHEMA);
   const [question, setQuestion] = useState(DEFAULT_QUESTION);
-  const [userQuery, setUserQuery] = useState(DEFAULT_QUERY);
+  const [userQuery, setUserQuery] = useState("");
   const [userLevel, setUserLevel] = useState<UserLevel>("beginner");
   const [response, setResponse] = useState<CoachResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showHint, setShowHint] = useState(true);
+  const [hintLoading, setHintLoading] = useState(false);
+
+  const fetchHint = useCallback(async () => {
+    if (!showHint || !question.trim()) {
+      return;
+    }
+
+    setHintLoading(true);
+    try {
+      const res = await fetch("/api/hint", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          schema,
+          question,
+          userLevel,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.hintQuery) {
+        setUserQuery(data.hintQuery);
+      }
+    } catch (err) {
+      console.error("Failed to fetch hint:", err);
+    } finally {
+      setHintLoading(false);
+    }
+  }, [schema, question, userLevel, showHint]);
+
+  // Fetch hint on initial load and when dependencies change
+  useEffect(() => {
+    if (showHint) {
+      fetchHint();
+    }
+  }, [showHint, question, userLevel, fetchHint]);
+
+  // Handle toggle change
+  const handleToggleHint = (enabled: boolean) => {
+    setShowHint(enabled);
+    if (!enabled) {
+      setUserQuery("");
+    }
+  };
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -186,8 +228,35 @@ export default function Home() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Your SQL Query
                 </label>
-                <LevelSelector level={userLevel} onLevelChange={setUserLevel} />
+                <div className="flex items-center gap-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Show Hint
+                    </span>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={showHint}
+                      onClick={() => handleToggleHint(!showHint)}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                        showHint ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          showHint ? "translate-x-6" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </label>
+                  <LevelSelector level={userLevel} onLevelChange={setUserLevel} />
+                </div>
               </div>
+              {hintLoading && (
+                <div className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  Generating hint...
+                </div>
+              )}
               <SQLEditor value={userQuery} onChange={setUserQuery} />
               <button
                 onClick={handleSubmit}
