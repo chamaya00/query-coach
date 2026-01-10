@@ -24,6 +24,10 @@ export async function executeSQL(
     const SQL = await getSQL();
     db = new SQL.Database();
 
+    if (!db) {
+      return { success: false, error: "Failed to initialize database" };
+    }
+
     // Set up schema and sample data
     db.run(schema);
 
