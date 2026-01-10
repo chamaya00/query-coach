@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import SQLEditor from "@/components/SQLEditor";
-import SchemaViewer from "@/components/SchemaViewer";
+import TableBrowser from "@/components/TableBrowser";
 import FeedbackPanel from "@/components/FeedbackPanel";
 import LevelSelector from "@/components/LevelSelector";
 import { UserLevel, CoachResponse } from "@/lib/types";
@@ -144,7 +144,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column */}
           <div className="space-y-6">
-            <SchemaViewer schema={schema} onSchemaChange={setSchema} />
+            <TableBrowser schema={schema} />
 
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
