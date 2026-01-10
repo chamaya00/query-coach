@@ -185,16 +185,16 @@ export default function TableBrowser({ schema }: TableBrowserProps) {
           {currentTable.data.length > 0 && (
             <div>
               <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                Sample Data ({currentTable.data.length} rows)
+                Sample Data ({currentTable.data.length} rows{currentTable.data.length > 10 ? ", showing 10" : ""})
               </h4>
-              <div className="overflow-x-auto border border-gray-200 dark:border-gray-700 rounded-md">
+              <div className="overflow-auto max-h-64 border border-gray-200 dark:border-gray-700 rounded-md">
                 <table className="min-w-full text-xs">
-                  <thead className="bg-gray-50 dark:bg-gray-900">
+                  <thead className="bg-gray-50 dark:bg-gray-900 sticky top-0">
                     <tr>
                       {currentTable.columns.map((col) => (
                         <th
                           key={col.name}
-                          className="px-3 py-2 text-left font-medium text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700"
+                          className="px-3 py-2 text-left font-medium text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900"
                         >
                           {col.name}
                         </th>
@@ -202,7 +202,7 @@ export default function TableBrowser({ schema }: TableBrowserProps) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {currentTable.data.map((row, idx) => (
+                    {currentTable.data.slice(0, 10).map((row, idx) => (
                       <tr
                         key={idx}
                         className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-750"

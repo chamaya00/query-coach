@@ -67,7 +67,15 @@ INSERT INTO orders (id, customer_id, order_date, status, total_amount) VALUES
   (5, 4, '2024-01-20', 'completed', 1379.98),
   (6, 2, '2024-01-22', 'shipped', 79.99),
   (7, 5, '2024-01-25', 'completed', 155.98),
-  (8, 1, '2024-02-01', 'pending', 29.99);
+  (8, 1, '2024-02-01', 'pending', 29.99),
+  (9, 3, '2024-02-05', 'completed', 1345.98),
+  (10, 4, '2024-02-08', 'completed', 65.98),
+  (11, 5, '2024-02-10', 'shipped', 89.99),
+  (12, 2, '2024-02-12', 'completed', 1299.99),
+  (13, 1, '2024-02-15', 'pending', 115.98),
+  (14, 3, '2024-02-18', 'completed', 79.99),
+  (15, 4, '2024-02-20', 'shipped', 149.98),
+  (16, 5, '2024-02-22', 'completed', 45.99);
 
 -- Sample data: Order Items
 INSERT INTO order_items (id, order_id, product_id, quantity, unit_price) VALUES
@@ -82,7 +90,19 @@ INSERT INTO order_items (id, order_id, product_id, quantity, unit_price) VALUES
   (9, 6, 6, 1, 79.99),
   (10, 7, 4, 1, 119.99),
   (11, 7, 7, 1, 35.99),
-  (12, 8, 2, 1, 29.99);`;
+  (12, 8, 2, 1, 29.99),
+  (13, 9, 1, 1, 1299.99),
+  (14, 9, 5, 1, 45.99),
+  (15, 10, 2, 1, 29.99),
+  (16, 10, 7, 1, 35.99),
+  (17, 11, 3, 1, 89.99),
+  (18, 12, 1, 1, 1299.99),
+  (19, 13, 6, 1, 79.99),
+  (20, 13, 7, 1, 35.99),
+  (21, 14, 6, 1, 79.99),
+  (22, 15, 4, 1, 119.99),
+  (23, 15, 2, 1, 29.99),
+  (24, 16, 5, 1, 45.99);`;
 
 const DEFAULT_QUESTION = "Find the total amount spent by each customer";
 
