@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from "react";
 import SQLEditor from "@/components/SQLEditor";
 import TableBrowser from "@/components/TableBrowser";
 import FeedbackPanel from "@/components/FeedbackPanel";
-import LevelSelector from "@/components/LevelSelector";
 import { UserLevel, CoachResponse } from "@/lib/types";
 
 const DEFAULT_SCHEMA = `-- E-commerce sample database
@@ -106,13 +105,16 @@ INSERT INTO order_items (id, order_id, product_id, quantity, unit_price) VALUES
 
 const DEFAULT_QUESTION = "Find the total amount spent by each customer";
 
+type Difficulty = UserLevel;
+
 export default function Home() {
   const [schema, setSchema] = useState(DEFAULT_SCHEMA);
   const [question, setQuestion] = useState(DEFAULT_QUESTION);
+  const [questionDifficulty, setQuestionDifficulty] = useState<Difficulty>("beginner");
   const [userQuery, setUserQuery] = useState("");
-  const [userLevel, setUserLevel] = useState<UserLevel>("beginner");
   const [response, setResponse] = useState<CoachResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [generatingQuestion, setGeneratingQuestion] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showHint, setShowHint] = useState(true);
   const [hintLoading, setHintLoading] = useState(false);
@@ -130,7 +132,7 @@ export default function Home() {
         body: JSON.stringify({
           schema,
           question,
-          userLevel,
+          userLevel: questionDifficulty,
         }),
       });
 
@@ -144,14 +146,14 @@ export default function Home() {
     } finally {
       setHintLoading(false);
     }
-  }, [schema, question, userLevel, showHint]);
+  }, [schema, question, questionDifficulty, showHint]);
 
   // Fetch hint on initial load and when dependencies change
   useEffect(() => {
     if (showHint) {
       fetchHint();
     }
-  }, [showHint, question, userLevel, fetchHint]);
+  }, [showHint, question, questionDifficulty, fetchHint]);
 
   // Handle toggle change
   const handleToggleHint = (enabled: boolean) => {
@@ -173,7 +175,7 @@ export default function Home() {
           schema,
           question,
           userQuery,
-          userLevel,
+          userLevel: questionDifficulty,
         }),
       });
 
@@ -188,6 +190,36 @@ export default function Home() {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGenerateQuestion = async (difficulty: Difficulty) => {
+    setGeneratingQuestion(true);
+    setError(null);
+    setQuestionDifficulty(difficulty);
+
+    try {
+      const res = await fetch("/api/generate-question", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          schema,
+          difficulty,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to generate question");
+      }
+
+      setQuestion(data.question);
+      setResponse(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to generate question");
+    } finally {
+      setGeneratingQuestion(false);
     }
   };
 
@@ -209,18 +241,67 @@ export default function Home() {
             <TableBrowser schema={schema} />
 
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Question to Answer
-              </label>
-              <input
-                type="text"
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
-                         bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-                         focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="What are you trying to query?"
-              />
+              <div className="flex justify-between items-start mb-3">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Question to Answer
+                </label>
+                <span className="text-xs px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300">
+                  {questionDifficulty}
+                </span>
+              </div>
+              <div className="relative mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                {generatingQuestion && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-blue-50 dark:bg-blue-900/50 rounded-md">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-800 rounded-full">
+                      <svg className="animate-spin h-4 w-4 text-blue-600 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      <span className="text-sm font-medium text-blue-700 dark:text-blue-200">Generating question...</span>
+                    </div>
+                  </div>
+                )}
+                <p className="text-gray-900 dark:text-white text-base leading-relaxed">
+                  {question}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  Generate new question:
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleGenerateQuestion("beginner")}
+                    disabled={generatingQuestion}
+                    className="px-3 py-1.5 text-sm font-medium rounded-md transition-colors
+                             bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300
+                             hover:bg-green-200 dark:hover:bg-green-800
+                             disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Beginner
+                  </button>
+                  <button
+                    onClick={() => handleGenerateQuestion("intermediate")}
+                    disabled={generatingQuestion}
+                    className="px-3 py-1.5 text-sm font-medium rounded-md transition-colors
+                             bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300
+                             hover:bg-yellow-200 dark:hover:bg-yellow-800
+                             disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Intermediate
+                  </button>
+                  <button
+                    onClick={() => handleGenerateQuestion("advanced")}
+                    disabled={generatingQuestion}
+                    className="px-3 py-1.5 text-sm font-medium rounded-md transition-colors
+                             bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300
+                             hover:bg-red-200 dark:hover:bg-red-800
+                             disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Advanced
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
@@ -228,33 +309,34 @@ export default function Home() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Your SQL Query
                 </label>
-                <div className="flex items-center gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                      Show Hint
-                    </span>
-                    <button
-                      type="button"
-                      role="switch"
-                      aria-checked={showHint}
-                      onClick={() => handleToggleHint(!showHint)}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                        showHint ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    Show Hint
+                  </span>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={showHint}
+                    onClick={() => handleToggleHint(!showHint)}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                      showHint ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        showHint ? "translate-x-6" : "translate-x-1"
                       }`}
-                    >
-                      <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          showHint ? "translate-x-6" : "translate-x-1"
-                        }`}
-                      />
-                    </button>
-                  </label>
-                  <LevelSelector level={userLevel} onLevelChange={setUserLevel} />
-                </div>
+                    />
+                  </button>
+                </label>
               </div>
               {hintLoading && (
-                <div className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  Generating hint...
+                <div className="mb-3 flex items-center gap-2 px-4 py-2 bg-purple-100 dark:bg-purple-900/50 rounded-md border border-purple-200 dark:border-purple-700">
+                  <svg className="animate-spin h-4 w-4 text-purple-600 dark:text-purple-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span className="text-sm font-medium text-purple-700 dark:text-purple-200">Generating hint...</span>
                 </div>
               )}
               <SQLEditor value={userQuery} onChange={setUserQuery} />
