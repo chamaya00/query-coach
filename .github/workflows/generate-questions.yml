@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       count:
-        description: 'Number of questions per difficulty level (default: 25, total will be 3x this)'
+        description: 'Number of questions per difficulty level (default: 10, total will be 3x this)'
         required: false
-        default: '25'
+        default: '10'
         type: string
 
 jobs:

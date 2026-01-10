@@ -168,14 +168,14 @@ async function generateQuestionWithHints(
 async function main() {
   // Parse command line arguments
   const args = process.argv.slice(2);
-  let countPerDifficulty = 25;
+  let countPerDifficulty = 10;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--count" && args[i + 1]) {
       countPerDifficulty = parseInt(args[i + 1], 10);
       if (isNaN(countPerDifficulty) || countPerDifficulty < 1) {
-        console.error("Invalid count value. Using default of 25.");
-        countPerDifficulty = 25;
+        console.error("Invalid count value. Using default of 10.");
+        countPerDifficulty = 10;
       }
     }
   }
