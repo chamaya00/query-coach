@@ -116,7 +116,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [generatingQuestion, setGeneratingQuestion] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showHint, setShowHint] = useState(true);
+  const [showHint, setShowHint] = useState(false);
   const [hintLoading, setHintLoading] = useState(false);
 
   const fetchHint = useCallback(async () => {

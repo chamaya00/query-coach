@@ -12,9 +12,11 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
     "@monaco-editor/react": "^4.6.0",
+    "@tailwindcss/typography": "^0.5.19",
     "next": "^16.1.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-markdown": "^10.1.0",
     "sql.js": "^1.10.0"
   },
   "devDependencies": {

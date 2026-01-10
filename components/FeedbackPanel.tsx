@@ -1,5 +1,6 @@
 "use client";
 
+import ReactMarkdown from "react-markdown";
 import { CoachResponse } from "@/lib/types";
 
 interface FeedbackPanelProps {
@@ -90,10 +91,8 @@ export default function FeedbackPanel({ response, error, loading }: FeedbackPane
         <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Coach Feedback
         </h3>
-        <div className="prose prose-sm dark:prose-invert max-w-none">
-          <div className="whitespace-pre-wrap text-gray-800 dark:text-gray-200">
-            {response.feedback}
-          </div>
+        <div className="prose prose-sm dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
+          <ReactMarkdown>{response.feedback}</ReactMarkdown>
         </div>
       </div>
     </div>
