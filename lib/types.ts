@@ -59,10 +59,6 @@ export interface CachedQuestion {
   id: string;
   difficulty: UserLevel;
   question: string;
-  hints: {
-    beginner: string;
-    intermediate: string;
-    advanced: string;
-  };
+  hint: string;
   generatedAt: string;
 }
