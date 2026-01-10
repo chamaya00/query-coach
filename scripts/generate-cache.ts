@@ -139,28 +139,18 @@ async function generateQuestionWithHints(
   // Small delay between API calls to avoid rate limiting
   await sleep(500);
 
-  // Generate hints for all skill levels
-  const hints: CachedQuestion["hints"] = {
-    beginner: "",
-    intermediate: "",
-    advanced: "",
-  };
-
-  for (const hintLevel of DIFFICULTIES) {
-    const hintResponse = await generateHintQuery({
-      schema: DEFAULT_SCHEMA,
-      question: questionResponse.question,
-      userLevel: hintLevel,
-    });
-    hints[hintLevel] = hintResponse.hintQuery;
-    await sleep(500);
-  }
+  // Generate a single hint at the same difficulty level as the question
+  const hintResponse = await generateHintQuery({
+    schema: DEFAULT_SCHEMA,
+    question: questionResponse.question,
+    userLevel: difficulty,
+  });
 
   return {
     id: generateId(),
     difficulty,
     question: questionResponse.question,
-    hints,
+    hint: hintResponse.hintQuery,
     generatedAt: new Date().toISOString(),
   };
 }
@@ -182,7 +172,7 @@ async function main() {
 
   console.log(`\nGenerating ${countPerDifficulty} questions per difficulty level`);
   console.log(`Total questions to generate: ${countPerDifficulty * 3}`);
-  console.log(`Each question will have hints for all 3 skill levels\n`);
+  console.log(`Each question will have 1 hint at its difficulty level\n`);
 
   // Load existing questions
   const existingQuestions = loadExistingQuestions();

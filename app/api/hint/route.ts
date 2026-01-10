@@ -19,9 +19,9 @@ export async function POST(request: NextRequest) {
     // Try to get hint from cache if questionId is provided
     if (questionId) {
       const cached = cachedQuestions.find((q) => q.id === questionId);
-      if (cached && cached.hints[level]) {
+      if (cached && cached.hint) {
         return NextResponse.json({
-          hintQuery: cached.hints[level],
+          hintQuery: cached.hint,
           fromCache: true,
         });
       }
