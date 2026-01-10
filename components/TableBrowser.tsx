@@ -185,7 +185,7 @@ export default function TableBrowser({ schema }: TableBrowserProps) {
           {currentTable.data.length > 0 && (
             <div>
               <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                Sample Data ({currentTable.data.length} rows{currentTable.data.length > 10 ? ", showing 10" : ""})
+                Sample Data ({currentTable.data.length} rows)
               </h4>
               <div className="overflow-auto max-h-64 border border-gray-200 dark:border-gray-700 rounded-md">
                 <table className="min-w-full text-xs">
@@ -202,7 +202,7 @@ export default function TableBrowser({ schema }: TableBrowserProps) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {currentTable.data.slice(0, 10).map((row, idx) => (
+                    {currentTable.data.map((row, idx) => (
                       <tr
                         key={idx}
                         className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-750"
