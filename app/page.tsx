@@ -118,6 +118,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [hintLoading, setHintLoading] = useState(false);
+  const [questionId, setQuestionId] = useState<string | null>(null);
 
   const fetchHint = useCallback(async () => {
     if (!showHint || !question.trim()) {
@@ -133,6 +134,7 @@ export default function Home() {
           schema,
           question,
           userLevel: questionDifficulty,
+          questionId,
         }),
       });
 
@@ -146,7 +148,7 @@ export default function Home() {
     } finally {
       setHintLoading(false);
     }
-  }, [schema, question, questionDifficulty, showHint]);
+  }, [schema, question, questionDifficulty, showHint, questionId]);
 
   // Fetch hint on initial load and when dependencies change
   useEffect(() => {
@@ -215,6 +217,7 @@ export default function Home() {
       }
 
       setQuestion(data.question);
+      setQuestionId(data.questionId || null);
       setResponse(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to generate question");
