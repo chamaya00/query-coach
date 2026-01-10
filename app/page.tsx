@@ -4,7 +4,6 @@ import { useState } from "react";
 import SQLEditor from "@/components/SQLEditor";
 import TableBrowser from "@/components/TableBrowser";
 import FeedbackPanel from "@/components/FeedbackPanel";
-import LevelSelector from "@/components/LevelSelector";
 import { UserLevel, CoachResponse } from "@/lib/types";
 
 const DEFAULT_SCHEMA = `-- E-commerce sample database
@@ -110,13 +109,16 @@ const DEFAULT_QUERY = `SELECT customers.name, SUM(orders.total_amount)
 FROM customers, orders
 GROUP BY customers.name`;
 
+type Difficulty = UserLevel;
+
 export default function Home() {
   const [schema, setSchema] = useState(DEFAULT_SCHEMA);
   const [question, setQuestion] = useState(DEFAULT_QUESTION);
+  const [questionDifficulty, setQuestionDifficulty] = useState<Difficulty>("beginner");
   const [userQuery, setUserQuery] = useState(DEFAULT_QUERY);
-  const [userLevel, setUserLevel] = useState<UserLevel>("beginner");
   const [response, setResponse] = useState<CoachResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [generatingQuestion, setGeneratingQuestion] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async () => {
@@ -131,7 +133,7 @@ export default function Home() {
           schema,
           question,
           userQuery,
-          userLevel,
+          userLevel: questionDifficulty,
         }),
       });
 
@@ -146,6 +148,36 @@ export default function Home() {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGenerateQuestion = async (difficulty: Difficulty) => {
+    setGeneratingQuestion(true);
+    setError(null);
+    setQuestionDifficulty(difficulty);
+
+    try {
+      const res = await fetch("/api/generate-question", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          schema,
+          difficulty,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to generate question");
+      }
+
+      setQuestion(data.question);
+      setResponse(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to generate question");
+    } finally {
+      setGeneratingQuestion(false);
     }
   };
 
@@ -167,18 +199,61 @@ export default function Home() {
             <TableBrowser schema={schema} />
 
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Question to Answer
-              </label>
-              <input
-                type="text"
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
-                         bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-                         focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="What are you trying to query?"
-              />
+              <div className="flex justify-between items-start mb-3">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Question to Answer
+                </label>
+                <span className="text-xs px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300">
+                  {questionDifficulty}
+                </span>
+              </div>
+              <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                <p className="text-gray-900 dark:text-white text-base leading-relaxed">
+                  {question}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  Generate new question:
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleGenerateQuestion("beginner")}
+                    disabled={generatingQuestion}
+                    className="px-3 py-1.5 text-sm font-medium rounded-md transition-colors
+                             bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300
+                             hover:bg-green-200 dark:hover:bg-green-800
+                             disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Beginner
+                  </button>
+                  <button
+                    onClick={() => handleGenerateQuestion("intermediate")}
+                    disabled={generatingQuestion}
+                    className="px-3 py-1.5 text-sm font-medium rounded-md transition-colors
+                             bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300
+                             hover:bg-yellow-200 dark:hover:bg-yellow-800
+                             disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Intermediate
+                  </button>
+                  <button
+                    onClick={() => handleGenerateQuestion("advanced")}
+                    disabled={generatingQuestion}
+                    className="px-3 py-1.5 text-sm font-medium rounded-md transition-colors
+                             bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300
+                             hover:bg-red-200 dark:hover:bg-red-800
+                             disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Advanced
+                  </button>
+                </div>
+                {generatingQuestion && (
+                  <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">
+                    Generating...
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
@@ -186,7 +261,6 @@ export default function Home() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Your SQL Query
                 </label>
-                <LevelSelector level={userLevel} onLevelChange={setUserLevel} />
               </div>
               <SQLEditor value={userQuery} onChange={setUserQuery} />
               <button
