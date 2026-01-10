@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "id": "q_1768074659840_iykqlc",
+    "difficulty": "beginner",
+    "question": "Find all products in the Sports category",
+    "hints": {
+      "beginner": "SELECT id, name, price, stock_quantity \nFROM products \nWHERE category = 'Sport';",
+      "intermediate": "SELECT p.name, p.price, p.stock_quantity\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE p.category = 'Sports'\nGROUP BY p.name, p.price, p.stock_quantity",
+      "advanced": "SELECT p.name, p.category, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'Sports'\nAND p.stock_quantity > 0\nAND EXISTS (\n    SELECT 1 \n    FROM order_items oi \n    JOIN orders o ON oi.order_id = o.id \n    WHERE oi.product_id = p.id \n    AND o.status = 'completed'\n)"
+    },
+    "generatedAt": "2026-01-10T19:50:59.841Z"
+  },
+  {
+    "id": "q_1768074671532_rjekkx",
+    "difficulty": "beginner",
+    "question": "Find all products in the Electronics category",
+    "hints": {
+      "beginner": "SELECT product_name, category, price\nFROM products\nWHERE category = 'Electronics';",
+      "intermediate": "SELECT p.name, p.price, p.stock_quantity\nFROM products p\nJOIN categories c ON p.category_id = c.id\nWHERE c.name = 'Electronics'",
+      "advanced": "SELECT p.name, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'electronics'\nORDER BY p.price DESC;"
+    },
+    "generatedAt": "2026-01-10T19:51:11.532Z"
+  },
+  {
+    "id": "q_1768074683281_6ladc2",
+    "difficulty": "beginner",
+    "question": "Find all products in the Sports category",
+    "hints": {
+      "beginner": "SELECT id, name, category, price, stock_quantity\nFROM products\nWHERE category = 'Sport';",
+      "intermediate": "SELECT name, category, price \nFROM products \nWHERE category LIKE '%Sports%'\nGROUP BY category;",
+      "advanced": "SELECT p.name, p.category, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'sports'\nAND p.stock_quantity > 0\nORDER BY p.price DESC;"
+    },
+    "generatedAt": "2026-01-10T19:51:23.281Z"
+  },
+  {
+    "id": "q_1768074694649_2rfwyf",
+    "difficulty": "beginner",
+    "question": "Find all products in the Sports category",
+    "hints": {
+      "beginner": "SELECT name, price FROM product WHERE category = 'Sports';",
+      "intermediate": "SELECT product_name, category, price\nFROM products\nWHERE category = 'Sports'",
+      "advanced": "SELECT p.name, p.category, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'sports'\nAND p.stock_quantity > 0\nORDER BY p.price DESC;"
+    },
+    "generatedAt": "2026-01-10T19:51:34.649Z"
+  },
+  {
+    "id": "q_1768074705767_2p3ydu",
+    "difficulty": "beginner",
+    "question": "Find all products in the Sports category",
+    "hints": {
+      "beginner": "SELECT name, price\nFROM products\nWHERE category = 'Sport';",
+      "intermediate": "SELECT name, category, price\nFROM products\nWHERE category LIKE '%sports%'",
+      "advanced": "SELECT p.name, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'sports'\nAND p.stock_quantity > 0\nORDER BY p.price DESC;"
+    },
+    "generatedAt": "2026-01-10T19:51:45.767Z"
+  },
+  {
+    "id": "q_1768074716979_ke9lt8",
+    "difficulty": "beginner",
+    "question": "Show all products in the Electronics category",
+    "hints": {
+      "beginner": "SELECT name, price, stock_quantity \nFROM products \nWHERE category = 'Electronic';",
+      "intermediate": "SELECT name, category, price, stock_quantity\nFROM products\nWHERE category LIKE 'electronics'",
+      "advanced": "SELECT p.name, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'Electronics'\nAND p.stock_quantity > 0\nORDER BY p.price DESC;"
+    },
+    "generatedAt": "2026-01-10T19:51:56.979Z"
+  },
+  {
+    "id": "q_1768074728512_9ovfwv",
+    "difficulty": "beginner",
+    "question": "Find all products in the Sports category",
+    "hints": {
+      "beginner": "SELECT name, price FROM products WHERE category = 'Sport';",
+      "intermediate": "SELECT p.name, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'Sports'\nGROUP BY p.category;",
+      "advanced": "SELECT p.name, p.category, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'sports'\nAND p.stock_quantity > 0\nORDER BY p.price DESC;"
+    },
+    "generatedAt": "2026-01-10T19:52:08.512Z"
+  },
+  {
+    "id": "q_1768074740121_0ehur9",
+    "difficulty": "beginner",
+    "question": "Find all products in the Sports category",
+    "hints": {
+      "beginner": "SELECT name, price FROM product WHERE category = 'Sports'",
+      "intermediate": "SELECT name, category, price \nFROM products \nWHERE category LIKE 'sports'",
+      "advanced": "SELECT p.name, p.category, p.price\nFROM products p\nWHERE p.category = 'Sports'\nAND p.stock_quantity > 0\nORDER BY p.price DESC"
+    },
+    "generatedAt": "2026-01-10T19:52:20.121Z"
+  },
+  {
+    "id": "q_1768074758280_l761b1",
+    "difficulty": "beginner",
+    "question": "Find all products with a price less than $50",
+    "hints": {
+      "beginner": "SELECT name, price FROM products WHERE price <= 50",
+      "intermediate": "SELECT name, price\nFROM products\nWHERE price <= 50.00",
+      "advanced": "SELECT name, price \nFROM products \nWHERE price < 50.00\nORDER BY price;"
+    },
+    "generatedAt": "2026-01-10T19:52:38.280Z"
+  },
+  {
+    "id": "q_1768074777521_t66i5e",
+    "difficulty": "beginner",
+    "question": "Find all products in the Electronics category",
+    "hints": {
+      "beginner": "SELECT name, category, price FROM products WHERE category = 'Electronic';",
+      "intermediate": "SELECT name, category, price, stock_quantity \nFROM products \nWHERE category LIKE 'electronics'",
+      "advanced": "SELECT p.name, p.price, p.stock_quantity\nFROM products p\nWHERE p.category = 'electronics'\nORDER BY p.price DESC;"
+    },
+    "generatedAt": "2026-01-10T19:52:57.521Z"
+  },
+  {
+    "id": "q_1768074797706_8jbkp7",
+    "difficulty": "intermediate",
+    "question": "Find all customers who have placed orders with a total amount greater than $100",
+    "hints": {
+      "beginner": "SELECT customers.name, customers.email\nFROM customers\nJOIN orders ON customers.id = orders.customer_id\nWHERE orders.total_amount > 100",
+      "intermediate": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.total_amount > 100\nGROUP BY c.name, c.email",
+      "advanced": "SELECT DISTINCT c.id, c.name, c.email\nFROM customers c\nINNER JOIN orders o ON c.id = o.customer_id\nWHERE o.total_amount > 100\nAND o.status IN ('completed', 'shipped')"
+    },
+    "generatedAt": "2026-01-10T19:53:17.706Z"
+  },
+  {
+    "id": "q_1768074814967_duvgj4",
+    "difficulty": "intermediate",
+    "question": "Find all customers from the West region along with their total order amounts",
+    "hints": {
+      "beginner": "SELECT c.name, c.region, SUM(o.total_amount) as total_orders\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE c.region = 'West'\nGROUP BY c.name, c.region",
+      "intermediate": "SELECT c.name, c.region, SUM(o.total_amount) as total_orders\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE c.region = 'West'\nGROUP BY c.name, c.region",
+      "advanced": "SELECT c.name, c.region, SUM(o.total_amount) as total_orders\nFROM customers c\nLEFT JOIN orders o ON c.id = o.customer_id\nWHERE c.region = 'West'\nGROUP BY c.name, c.region"
+    },
+    "generatedAt": "2026-01-10T19:53:34.967Z"
+  },
+  {
+    "id": "q_1768074835404_0ofpl9",
+    "difficulty": "intermediate",
+    "question": "Show customers who have placed orders in both January and February 2024",
+    "hints": {
+      "beginner": "SELECT DISTINCT c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.order_date >= '2024-01-01' \n  AND o.order_date <= '2024-02-29'",
+      "intermediate": "SELECT DISTINCT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+      "advanced": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT EXTRACT(MONTH FROM o.order_date)) = 2"
+    },
+    "generatedAt": "2026-01-10T19:53:55.404Z"
+  },
+  {
+    "id": "q_1768074853318_4v9quo",
+    "difficulty": "intermediate",
+    "question": "Find the total quantity of each product sold across all completed orders",
+    "hints": {
+      "beginner": "SELECT p.name, SUM(oi.quantity) AS total_sold\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status = 'complete'\nGROUP BY p.name",
+      "intermediate": "SELECT p.name, SUM(oi.quantity) as total_sold\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status = 'completed'\nGROUP BY p.name",
+      "advanced": "SELECT p.name, SUM(oi.quantity) as total_sold\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status = 'completed'\nGROUP BY p.name\nORDER BY total_sold DESC;"
+    },
+    "generatedAt": "2026-01-10T19:54:13.318Z"
+  },
+  {
+    "id": "q_1768074873063_wcueu4",
+    "difficulty": "intermediate",
+    "question": "Find customers who have placed orders totaling more than $500",
+    "hints": {
+      "beginner": "SELECT c.name, SUM(o.total_amount) as total_spent\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nGROUP BY c.name\nHAVING total_spent > 500",
+      "intermediate": "SELECT c.name, SUM(o.total_amount) as total_spent\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE SUM(o.total_amount) > 500\nGROUP BY c.id, c.name",
+      "advanced": "SELECT c.name, c.email, SUM(o.total_amount) as total_spent\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.status IN ('completed', 'shipped')\nGROUP BY c.id, c.name, c.email\nHAVING SUM(o.total_amount) > 500\nORDER BY total_spent DESC;"
+    },
+    "generatedAt": "2026-01-10T19:54:33.063Z"
+  },
+  {
+    "id": "q_1768074891498_o044dx",
+    "difficulty": "intermediate",
+    "question": "Find the total revenue generated by each product category",
+    "hints": {
+      "beginner": "SELECT p.category, SUM(oi.quantity * oi.unit_price) AS total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nGROUP BY p.category",
+      "intermediate": "SELECT p.category, SUM(oi.quantity * oi.unit_price) AS total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE total_revenue > 0\nGROUP BY p.category",
+      "advanced": "SELECT p.category, SUM(oi.quantity * oi.unit_price) as total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nGROUP BY p.category\nORDER BY total_revenue DESC;"
+    },
+    "generatedAt": "2026-01-10T19:54:51.498Z"
+  },
+  {
+    "id": "q_1768074908567_q8yk2e",
+    "difficulty": "intermediate",
+    "question": "Find customers who have placed orders in both January and February 2024",
+    "hints": {
+      "beginner": "SELECT DISTINCT c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.order_date >= '2024-01-01' AND o.order_date <= '2024-02-29'",
+      "intermediate": "SELECT DISTINCT c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (EXTRACT(MONTH FROM o.order_date) = 1 AND EXTRACT(YEAR FROM o.order_date) = 2024)\n   OR (EXTRACT(MONTH FROM o.order_date) = 2 AND EXTRACT(YEAR FROM o.order_date) = 2024)",
+      "advanced": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o1 ON c.id = o1.customer_id\nJOIN orders o2 ON c.id = o2.customer_id\nWHERE o1.order_date >= '2024-01-01' AND o1.order_date < '2024-02-01'\n  AND o2.order_date >= '2024-02-01' AND o2.order_date < '2024-03-01'"
+    },
+    "generatedAt": "2026-01-10T19:55:08.567Z"
+  },
+  {
+    "id": "q_1768074929038_9bqomk",
+    "difficulty": "intermediate",
+    "question": "Find the total revenue generated by each product category",
+    "hints": {
+      "beginner": "SELECT p.category, SUM(oi.quantity * oi.unit_price) AS total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nGROUP BY p.category",
+      "intermediate": "SELECT p.category, SUM(oi.unit_price * oi.quantity) AS total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE o.status = 'completed'\nGROUP BY p.category\nORDER BY total_revenue DESC;",
+      "advanced": "SELECT p.category, SUM(oi.quantity * oi.unit_price) as total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status = 'completed'\nGROUP BY p.category\nORDER BY total_revenue DESC"
+    },
+    "generatedAt": "2026-01-10T19:55:29.038Z"
+  },
+  {
+    "id": "q_1768074946572_wyshs4",
+    "difficulty": "intermediate",
+    "question": "Show customers who have placed orders in both January and February 2024",
+    "hints": {
+      "beginner": "SELECT DISTINCT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+      "intermediate": "SELECT DISTINCT c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+      "advanced": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT EXTRACT(MONTH FROM o.order_date)) = 2"
+    },
+    "generatedAt": "2026-01-10T19:55:46.572Z"
+  },
+  {
+    "id": "q_1768074968330_vob2od",
+    "difficulty": "intermediate",
+    "question": "Find the total revenue generated by each product category",
+    "hints": {
+      "beginner": "SELECT p.category, SUM(oi.unit_price * oi.quantity) AS total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nGROUP BY p.category",
+      "intermediate": "SELECT p.category, SUM(oi.unit_price * oi.quantity) as total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE o.status = 'completed'\nGROUP BY p.category\nORDER BY total_revenue DESC",
+      "advanced": "SELECT p.category, SUM(oi.quantity * oi.unit_price) as total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nGROUP BY p.category\nORDER BY total_revenue DESC;"
+    },
+    "generatedAt": "2026-01-10T19:56:08.330Z"
+  },
+  {
+    "id": "q_1768074984399_p0qbrq",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from at least 3 different categories",
+    "hints": {
+      "beginner": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.name\nHAVING COUNT(DISTINCT p.category) > 3",
+      "intermediate": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING category_count >= 3",
+      "advanced": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name, c.email\nHAVING COUNT(DISTINCT p.category) >= 3"
+    },
+    "generatedAt": "2026-01-10T19:56:24.399Z"
+  },
+  {
+    "id": "q_1768075003341_j6l70t",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from at least three different categories",
+    "hints": {
+      "beginner": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) > 3",
+      "intermediate": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name, c.email\nHAVING COUNT(DISTINCT p.category) >= 3",
+      "advanced": "SELECT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) >= 3"
+    },
+    "generatedAt": "2026-01-10T19:56:43.341Z"
+  },
+  {
+    "id": "q_1768075023499_f501ph",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from at least 3 different categories",
+    "hints": {
+      "beginner": "SELECT c.name, COUNT(p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.name\nHAVING category_count >= 3",
+      "intermediate": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING category_count >= 3",
+      "advanced": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name, c.email\nHAVING COUNT(DISTINCT p.category) >= 3"
+    },
+    "generatedAt": "2026-01-10T19:57:03.499Z"
+  },
+  {
+    "id": "q_1768075042455_wpjk22",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from at least 3 different categories",
+    "hints": {
+      "beginner": "SELECT c.name, c.email, COUNT(p.category) as categories_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name, c.email\nHAVING COUNT(p.category) >= 3",
+      "intermediate": "SELECT c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(p.category) >= 3",
+      "advanced": "SELECT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) >= 3"
+    },
+    "generatedAt": "2026-01-10T19:57:22.455Z"
+  },
+  {
+    "id": "q_1768075061692_jp0h72",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from at least three different categories",
+    "hints": {
+      "beginner": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name, c.email\nHAVING COUNT(DISTINCT p.category) > 3",
+      "intermediate": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.name\nHAVING category_count >= 3",
+      "advanced": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) >= 3"
+    },
+    "generatedAt": "2026-01-10T19:57:41.692Z"
+  },
+  {
+    "id": "q_1768075082300_mfbe2o",
+    "difficulty": "advanced",
+    "question": "Find customers who have spent more than the average spending of customers in their own region",
+    "hints": {
+      "beginner": "SELECT c.name, c.region, SUM(o.total_amount) as total_spent\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nGROUP BY c.id, c.name, c.region\nHAVING SUM(o.total_amount) > (\n    SELECT AVG(total_spent)\n    FROM (\n        SELECT SUM(o2.total_amount) as total_spent\n        FROM customers c2\n        JOIN orders o2 ON c2.id = o2.customer_id\n        WHERE c2.region = c.region\n        GROUP BY c2.id\n    ) regional_spending\n)",
+      "intermediate": "SELECT c.name, c.region, \n       SUM(o.total_amount) as customer_spending,\n       AVG(o.total_amount) OVER (PARTITION BY c.region) as region_avg\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name, c.region\nHAVING SUM(o.total_amount) > AVG(o.total_amount) OVER (PARTITION BY c.region)",
+      "advanced": "WITH region_avg AS (\n    SELECT region, AVG(total_spent) as avg_spending\n    FROM (\n        SELECT c.id, c.name, c.region, SUM(o.total_amount) as total_spent\n        FROM customers c\n        JOIN orders o ON c.id = o.customer_id\n        GROUP BY c.id, c.name, c.region\n    ) customer_totals\n    GROUP BY region\n),\ncustomer_spending AS (\n    SELECT c.id, c.name, c.region, SUM(o.total_amount) as total_spent\n    FROM customers c\n    JOIN orders o ON c.id = o.customer_id\n    GROUP BY c.id, c.name, c.region\n)\nSELECT cs.name, cs.region, cs.total_spent, ra.avg_spending\nFROM customer_spending cs\nJOIN region_avg ra ON cs.region = ra.region\nWHERE cs.total_spent > ra.avg_spending;"
+    },
+    "generatedAt": "2026-01-10T19:58:02.300Z"
+  },
+  {
+    "id": "q_1768075098592_9muduz",
+    "difficulty": "advanced",
+    "question": "Find customers who have purchased products from at least 3 different categories",
+    "hints": {
+      "beginner": "SELECT c.name, COUNT(p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING category_count >= 3",
+      "intermediate": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name, c.email\nHAVING COUNT(p.category) >= 3",
+      "advanced": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) >= 3"
+    },
+    "generatedAt": "2026-01-10T19:58:18.592Z"
+  },
+  {
+    "id": "q_1768075120873_hzjrgv",
+    "difficulty": "advanced",
+    "question": "Find customers who have spent more in January 2024 than in February 2024",
+    "hints": {
+      "beginner": "SELECT c.name, c.email,\n       SUM(CASE WHEN o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01' THEN o.total_amount ELSE 0 END) AS jan_spending,\n       SUM(CASE WHEN o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01' THEN o.total_amount ELSE 0 END) AS feb_spending\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name, c.email\nHAVING jan_spending > feb_spending;",
+      "intermediate": "SELECT c.name, c.email,\n       SUM(CASE WHEN o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01' THEN o.total_amount ELSE 0 END) AS jan_total,\n       SUM(CASE WHEN o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01' THEN o.total_amount ELSE 0 END) AS feb_total\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE jan_total > feb_total\nGROUP BY c.id, c.name, c.email",
+      "advanced": "WITH monthly_spending AS (\n    SELECT \n        c.id,\n        c.name,\n        EXTRACT(MONTH FROM o.order_date) as month,\n        SUM(o.total_amount) as monthly_total\n    FROM customers c\n    JOIN orders o ON c.id = o.customer_id\n    WHERE o.order_date >= '2024-01-01' AND o.order_date < '2024-03-01'\n        AND o.status = 'completed'\n    GROUP BY c.id, c.name, EXTRACT(MONTH FROM o.order_date)\n),\ncustomer_comparison AS (\n    SELECT \n        id,\n        name,\n        SUM(CASE WHEN month = 1 THEN monthly_total ELSE 0 END) as jan_spending,\n        SUM(CASE WHEN month = 2 THEN monthly_total ELSE 0 END) as feb_spending\n    FROM monthly_spending\n    GROUP BY id, name\n)\nSELECT id, name, jan_spending, feb_spending\nFROM customer_comparison\nWHERE jan_spending > feb_spending"
+    },
+    "generatedAt": "2026-01-10T19:58:40.873Z"
+  },
+  {
+    "id": "q_1768075138247_8kac8k",
+    "difficulty": "advanced",
+    "question": "Find customers who have spent more on Electronics products than on all other categories combined",
+    "hints": {
+      "beginner": "SELECT c.name, c.email,\n       SUM(CASE WHEN p.category = 'Electronics' THEN oi.quantity * oi.unit_price ELSE 0 END) AS electronics_spending,\n       SUM(CASE WHEN p.category != 'Electronics' THEN oi.quantity * oi.unit_price ELSE 0 END) AS other_spending\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name, c.email\nHAVING electronics_spending >= other_spending",
+      "intermediate": "SELECT c.id, c.name,\n       SUM(CASE WHEN p.category = 'Electronics' THEN oi.quantity * oi.unit_price ELSE 0 END) AS electronics_spending,\n       SUM(CASE WHEN p.category != 'Electronics' THEN oi.quantity * oi.unit_price ELSE 0 END) AS other_spending\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING electronics_spending > other_spending;",
+      "advanced": "SELECT c.id, c.name,\n       SUM(CASE WHEN p.category = 'Electronics' THEN oi.quantity * oi.unit_price ELSE 0 END) as electronics_spending,\n       SUM(CASE WHEN p.category != 'Electronics' THEN oi.quantity * oi.unit_price ELSE 0 END) as other_spending\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING electronics_spending > other_spending;"
+    },
+    "generatedAt": "2026-01-10T19:58:58.247Z"
+  },
+  {
+    "id": "q_1768075156484_8p73b3",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from at least three different categories",
+    "hints": {
+      "beginner": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.name\nHAVING COUNT(DISTINCT p.category) > 3",
+      "intermediate": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING category_count >= 3",
+      "advanced": "SELECT c.id, c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) >= 3"
+    },
+    "generatedAt": "2026-01-10T19:59:16.484Z"
+  }
+]
