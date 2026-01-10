@@ -3,13 +3,14 @@ import { QueryResult } from "./types";
 
 let SQL: any = null;
 
+const WASM_URL = "https://sql.js.org/dist/sql-wasm.wasm";
+
 async function getSQL() {
   if (!SQL) {
-    SQL = await initSqlJs({
-      // Load WASM from CDN in browser, or bundled in Node
-      locateFile: (file: string) =>
-        `https://sql.js.org/dist/${file}`,
-    });
+    // In Node.js, we need to fetch the WASM binary via HTTP
+    // since locateFile with a URL doesn't work server-side
+    const wasmBinary = await fetch(WASM_URL).then((res) => res.arrayBuffer());
+    SQL = await initSqlJs({ wasmBinary });
   }
   return SQL;
 }
