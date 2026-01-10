@@ -54,3 +54,15 @@ export interface EvalScore {
   encouragement?: number;
   actionability?: number;
 }
+
+export interface CachedQuestion {
+  id: string;
+  difficulty: UserLevel;
+  question: string;
+  hints: {
+    beginner: string;
+    intermediate: string;
+    advanced: string;
+  };
+  generatedAt: string;
+}
