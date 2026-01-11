@@ -22,7 +22,7 @@ const nextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net blob:",
               "style-src 'self' 'unsafe-inline'", // Required for styled-jsx and inline styles
               "img-src 'self' data: blob:",
-              "font-src 'self' https://cdn.jsdelivr.net",
+              "font-src 'self' https://cdn.jsdelivr.net data:",
               "connect-src 'self' https://cdn.jsdelivr.net",
               "worker-src 'self' blob:",
               "frame-ancestors 'none'",
