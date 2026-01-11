@@ -331,13 +331,13 @@ export default function Home() {
               </div>
             </div>
 
-            <div className={`${theme.card} ${theme.cardHover} p-4`}>
-              <div className="flex justify-between items-center mb-2">
-                <label className={`block text-sm font-medium ${theme.labelText}`}>
+            <div className="bg-[#1e1e1e] rounded-xl shadow-lg border border-gray-700 p-4 hover:shadow-xl transition-all">
+              <div className="flex justify-between items-center mb-3">
+                <label className="block text-sm font-medium text-gray-200">
                   Your SQL Query
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <span className={`text-sm ${theme.mutedText}`}>
+                  <span className="text-sm text-gray-400">
                     Show Hint
                   </span>
                   <button
@@ -346,7 +346,7 @@ export default function Home() {
                     aria-checked={showHint}
                     onClick={() => handleToggleHint(!showHint)}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      showHint ? theme.toggleOn : theme.toggleOff
+                      showHint ? "bg-cyan-500" : "bg-gray-600"
                     }`}
                   >
                     <span
@@ -358,12 +358,12 @@ export default function Home() {
                 </label>
               </div>
               {hintLoading && (
-                <div className={`mb-3 flex items-center gap-2 px-4 py-2 rounded-md border ${theme.hintBg}`}>
-                  <svg className={`animate-spin h-4 w-4 ${theme.loadingSpinner}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <div className="mb-3 flex items-center gap-2 px-4 py-2 rounded-md border bg-gray-800 border-gray-600">
+                  <svg className="animate-spin h-4 w-4 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  <span className={`text-sm font-medium ${theme.hintText}`}>
+                  <span className="text-sm font-medium text-cyan-400">
                     Generating hint...
                   </span>
                 </div>
@@ -372,7 +372,7 @@ export default function Home() {
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className={`mt-4 w-full font-medium py-2 px-4 rounded-md transition-colors duration-200 disabled:opacity-50 ${theme.primaryBtn}`}
+                className="mt-4 w-full font-medium py-2.5 px-4 rounded-lg transition-all duration-200 disabled:opacity-50 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-white shadow-md hover:shadow-lg"
               >
                 {loading ? "Getting Feedback..." : "Get Feedback"}
               </button>
