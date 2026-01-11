@@ -9,7 +9,7 @@ interface SQLEditorProps {
 
 export default function SQLEditor({ value, onChange }: SQLEditorProps) {
   return (
-    <div className="border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden">
+    <div className="border border-cyan-200 rounded-xl overflow-hidden shadow-sm">
       <Editor
         height="200px"
         defaultLanguage="sql"
