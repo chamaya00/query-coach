@@ -4,209 +4,239 @@
     "difficulty": "beginner",
     "question": "Find all products in the Sports category",
     "hint": "SELECT name, price, stock_quantity \nFROM products \nWHERE category = 'Sport'",
-    "generatedAt": "2026-01-10T20:16:34.391Z"
+    "generatedAt": "2026-01-10T20:16:34.391Z",
+    "fingerprint": "products-category-equals"
   },
   {
     "id": "q_1768076199135_t60mla",
     "difficulty": "beginner",
     "question": "Find all products with a price less than $50",
     "hint": "SELECT name, price FROM products WHERE price <= 50;",
-    "generatedAt": "2026-01-10T20:16:39.135Z"
+    "generatedAt": "2026-01-10T20:16:39.135Z",
+    "fingerprint": "products-price-less-than"
   },
   {
     "id": "q_1768076203709_2w0qa3",
     "difficulty": "beginner",
     "question": "Show all products with a price less than $50",
     "hint": "SELECT name, price FROM products WHERE price <= 50;",
-    "generatedAt": "2026-01-10T20:16:43.709Z"
+    "generatedAt": "2026-01-10T20:16:43.709Z",
+    "fingerprint": "products-price-less-than"
   },
   {
     "id": "q_1768076208447_jxowc5",
     "difficulty": "beginner",
     "question": "Find all products in the Electronics category",
     "hint": "SELECT id, name, category, price \nFROM products \nWHERE category = 'Electronic'",
-    "generatedAt": "2026-01-10T20:16:48.447Z"
+    "generatedAt": "2026-01-10T20:16:48.447Z",
+    "fingerprint": "products-category-equals"
   },
   {
     "id": "q_1768076213279_c4gjch",
     "difficulty": "beginner",
     "question": "Find all products in the Sports category",
     "hint": "SELECT id, name, price \nFROM products \nWHERE category = 'Sport';",
-    "generatedAt": "2026-01-10T20:16:53.279Z"
+    "generatedAt": "2026-01-10T20:16:53.279Z",
+    "fingerprint": "products-category-equals"
   },
   {
     "id": "q_1768076218256_ky6d9h",
     "difficulty": "beginner",
     "question": "Find all products with a price less than $50",
     "hint": "SELECT name, price FROM products WHERE price <= 50;",
-    "generatedAt": "2026-01-10T20:16:58.256Z"
+    "generatedAt": "2026-01-10T20:16:58.256Z",
+    "fingerprint": "products-price-less-than"
   },
   {
     "id": "q_1768076222937_8ct2w7",
     "difficulty": "beginner",
     "question": "Find all products in the Sports category",
     "hint": "SELECT name, price FROM products WHERE category = 'Sport';",
-    "generatedAt": "2026-01-10T20:17:02.937Z"
+    "generatedAt": "2026-01-10T20:17:02.937Z",
+    "fingerprint": "products-category-equals"
   },
   {
     "id": "q_1768076228008_5vbrlv",
     "difficulty": "beginner",
     "question": "Find all products in the Sports category",
     "hint": "SELECT id, name, price, stock_quantity\nFROM products\nWHERE category = 'Sport';",
-    "generatedAt": "2026-01-10T20:17:08.008Z"
+    "generatedAt": "2026-01-10T20:17:08.008Z",
+    "fingerprint": "products-category-equals"
   },
   {
     "id": "q_1768076232615_mg82bb",
     "difficulty": "beginner",
     "question": "Find all products with a price less than $50",
     "hint": "SELECT name, price FROM products WHERE price <= 50;",
-    "generatedAt": "2026-01-10T20:17:12.616Z"
+    "generatedAt": "2026-01-10T20:17:12.616Z",
+    "fingerprint": "products-price-less-than"
   },
   {
     "id": "q_1768076237261_05a82e",
     "difficulty": "beginner",
     "question": "Find all products in the Sports category",
     "hint": "SELECT id, name, price \nFROM products \nWHERE category = 'Sport'",
-    "generatedAt": "2026-01-10T20:17:17.261Z"
+    "generatedAt": "2026-01-10T20:17:17.261Z",
+    "fingerprint": "products-category-equals"
   },
   {
     "id": "q_1768076245364_37v2o0",
     "difficulty": "intermediate",
     "question": "Find the average order value for each customer region",
     "hint": "SELECT c.region, AVG(o.total_amount) AS avg_order_value\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.status = 'completed'\nGROUP BY c.region",
-    "generatedAt": "2026-01-10T20:17:25.364Z"
+    "generatedAt": "2026-01-10T20:17:25.364Z",
+    "fingerprint": "customers-orders-region-avg-group"
   },
   {
     "id": "q_1768076255174_aucogk",
     "difficulty": "intermediate",
     "question": "Find all customers who have placed more than 2 orders",
     "hint": "SELECT c.name, COUNT(o.id) as order_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE COUNT(o.id) > 2\nGROUP BY c.name",
-    "generatedAt": "2026-01-10T20:17:35.174Z"
+    "generatedAt": "2026-01-10T20:17:35.174Z",
+    "fingerprint": "customers-orders-count-greater"
   },
   {
     "id": "q_1768076266500_24wioe",
     "difficulty": "intermediate",
     "question": "Find all customers who have placed orders with a total amount greater than $500",
     "hint": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.total_amount > 500\nGROUP BY c.name, c.email",
-    "generatedAt": "2026-01-10T20:17:46.500Z"
+    "generatedAt": "2026-01-10T20:17:46.500Z",
+    "fingerprint": "customers-orders-amount-greater"
   },
   {
     "id": "q_1768076276871_1wqwco",
     "difficulty": "intermediate",
     "question": "Show the total quantity sold for each product category",
     "hint": "SELECT p.category, SUM(oi.quantity) as total_quantity\nFROM products p, order_items oi\nWHERE p.id = oi.product_id\nGROUP BY p.category",
-    "generatedAt": "2026-01-10T20:17:56.871Z"
+    "generatedAt": "2026-01-10T20:17:56.871Z",
+    "fingerprint": "products-category-quantity-sum-group"
   },
   {
     "id": "q_1768076286896_llk3as",
     "difficulty": "intermediate",
     "question": "Find the total quantity sold for each product category",
     "hint": "SELECT p.category, SUM(oi.quantity) as total_quantity\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE p.category IS NOT NULL\nGROUP BY p.category",
-    "generatedAt": "2026-01-10T20:18:06.896Z"
+    "generatedAt": "2026-01-10T20:18:06.896Z",
+    "fingerprint": "products-category-quantity-sum-group"
   },
   {
     "id": "q_1768076297347_ugnkvd",
     "difficulty": "intermediate",
     "question": "Find customers who have placed orders in both January and February 2024",
     "hint": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.order_date >= '2024-01-01' \n  AND o.order_date < '2024-03-01'\nGROUP BY c.id, c.name\nHAVING COUNT(*) >= 2",
-    "generatedAt": "2026-01-10T20:18:17.347Z"
+    "generatedAt": "2026-01-10T20:18:17.347Z",
+    "fingerprint": "customers-orders-months-both-exists"
   },
   {
     "id": "q_1768076308417_ehwsis",
     "difficulty": "intermediate",
     "question": "Find the total revenue generated by each product category",
     "hint": "SELECT \n  p.category,\n  SUM(oi.quantity * oi.unit_price) AS total_revenue\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE o.status = 'completed'\nGROUP BY p.category\nORDER BY total_revenue DESC",
-    "generatedAt": "2026-01-10T20:18:28.417Z"
+    "generatedAt": "2026-01-10T20:18:28.417Z",
+    "fingerprint": "products-category-revenue-sum-group"
   },
   {
     "id": "q_1768076318323_0w1864",
     "difficulty": "intermediate",
     "question": "Find the total quantity sold for each product category",
     "hint": "SELECT p.category, SUM(oi.quantity) as total_quantity\nFROM products p, order_items oi\nWHERE p.id = oi.product_id\nGROUP BY p.category",
-    "generatedAt": "2026-01-10T20:18:38.323Z"
+    "generatedAt": "2026-01-10T20:18:38.323Z",
+    "fingerprint": "products-category-quantity-sum-group"
   },
   {
     "id": "q_1768076329894_x9yezw",
     "difficulty": "intermediate",
     "question": "Find all customers who have placed orders in both January and February 2024",
     "hint": "SELECT DISTINCT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
-    "generatedAt": "2026-01-10T20:18:49.894Z"
+    "generatedAt": "2026-01-10T20:18:49.894Z",
+    "fingerprint": "customers-orders-months-both-exists"
   },
   {
     "id": "q_1768076339860_ibkzta",
     "difficulty": "intermediate",
     "question": "Find the total quantity of each product sold across all orders",
     "hint": "SELECT p.name, SUM(oi.quantity) as total_sold\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE p.stock_quantity > 0\nGROUP BY p.name",
-    "generatedAt": "2026-01-10T20:18:59.860Z"
+    "generatedAt": "2026-01-10T20:18:59.860Z",
+    "fingerprint": "products-orders-quantity-sum-group"
   },
   {
     "id": "q_1768076352317_ohexqm",
     "difficulty": "advanced",
     "question": "Find customers who have spent more on Electronics products than on all other categories combined",
     "hint": "WITH customer_spending AS (\n  SELECT \n    c.id,\n    c.name,\n    p.category,\n    SUM(oi.quantity * oi.unit_price) as category_spending\n  FROM customers c\n  JOIN orders o ON c.id = o.customer_id\n  JOIN order_items oi ON o.id = oi.order_id\n  JOIN products p ON oi.product_id = p.id\n  WHERE o.status = 'completed'\n  GROUP BY c.id, c.name, p.category\n),\nspending_comparison AS (\n  SELECT \n    id,\n    name,\n    SUM(CASE WHEN category = 'Electronics' THEN category_spending ELSE 0 END) as electronics_spending,\n    SUM(CASE WHEN category != 'Electronics' THEN category_spending ELSE 0 END) as other_spending\n  FROM customer_spending\n  GROUP BY id, name\n)\nSELECT id, name, electronics_spending, other_spending\nFROM spending_comparison\nWHERE electronics_spending > other_spending\nAND electronics_spending > 0;",
-    "generatedAt": "2026-01-10T20:19:12.317Z"
+    "generatedAt": "2026-01-10T20:19:12.317Z",
+    "fingerprint": "customers-products-electronics-category-compare-sum"
   },
   {
     "id": "q_1768076358986_e09rki",
     "difficulty": "advanced",
     "question": "Find products that have been purchased by customers from all three regions",
     "hint": "SELECT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nWHERE c.region IN ('West', 'East', 'Central')\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT c.region) = 3;",
-    "generatedAt": "2026-01-10T20:19:18.986Z"
+    "generatedAt": "2026-01-10T20:19:18.986Z",
+    "fingerprint": "products-customers-regions-all-join"
   },
   {
     "id": "q_1768076369651_kiqii5",
     "difficulty": "advanced",
     "question": "Find products that have been ordered by customers from all three regions",
     "hint": "SELECT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nWHERE c.region IN ('West', 'East', 'Central')\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT c.region) >= 3",
-    "generatedAt": "2026-01-10T20:19:29.651Z"
+    "generatedAt": "2026-01-10T20:19:29.651Z",
+    "fingerprint": "products-customers-regions-all-join"
   },
   {
     "id": "q_1768076380718_j0w981",
     "difficulty": "advanced",
     "question": "Find customers who have ordered products from at least 3 different categories",
     "hint": "WITH customer_categories AS (\n    SELECT \n        c.id,\n        c.name,\n        p.category\n    FROM customers c\n    JOIN orders o ON c.id = o.customer_id\n    JOIN order_items oi ON o.id = oi.order_id\n    JOIN products p ON oi.product_id = p.id\n    WHERE o.status = 'completed'\n    GROUP BY c.id, c.name, p.category\n),\ncategory_counts AS (\n    SELECT \n        id,\n        name,\n        COUNT(category) as category_count\n    FROM customer_categories\n    GROUP BY id, name\n)\nSELECT id, name\nFROM category_counts\nWHERE category_count >= 3;",
-    "generatedAt": "2026-01-10T20:19:40.718Z"
+    "generatedAt": "2026-01-10T20:19:40.718Z",
+    "fingerprint": "customers-products-categories-count-min"
   },
   {
     "id": "q_1768076394449_wtlpze",
     "difficulty": "advanced",
     "question": "Find customers who have placed orders in every month that any customer has placed an order",
     "hint": "WITH monthly_orders AS (\n    SELECT DISTINCT \n        strftime('%Y-%m', order_date) as order_month,\n        customer_id\n    FROM orders\n),\nall_months AS (\n    SELECT DISTINCT strftime('%Y-%m', order_date) as order_month\n    FROM orders\n),\ncustomer_month_counts AS (\n    SELECT \n        customer_id,\n        COUNT(DISTINCT order_month) as months_with_orders\n    FROM monthly_orders\n    GROUP BY customer_id\n),\ntotal_months AS (\n    SELECT COUNT(*) as total_month_count\n    FROM all_months\n)\nSELECT \n    c.id,\n    c.name\nFROM customers c\nJOIN customer_month_counts cmc ON c.id = cmc.customer_id\nWHERE cmc.months_with_orders = (SELECT total_month_count FROM total_months)",
-    "generatedAt": "2026-01-10T20:19:54.449Z"
+    "generatedAt": "2026-01-10T20:19:54.449Z",
+    "fingerprint": "customers-orders-months-all-division"
   },
   {
     "id": "q_1768076403863_trmpdp",
     "difficulty": "advanced",
     "question": "Find customers who have ordered from all product categories available in the store",
     "hint": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE c.id IN (\n    SELECT customer_id\n    FROM orders o2\n    JOIN order_items oi2 ON o2.id = oi2.order_id\n    JOIN products p2 ON oi2.product_id = p2.id\n    GROUP BY customer_id\n    HAVING COUNT(DISTINCT p2.category) = (\n        SELECT COUNT(DISTINCT category) FROM products\n    )\n)\nGROUP BY c.id, c.name, c.email;",
-    "generatedAt": "2026-01-10T20:20:03.863Z"
+    "generatedAt": "2026-01-10T20:20:03.863Z",
+    "fingerprint": "customers-categories-all-exists"
   },
   {
     "id": "q_1768076413714_c9chtc",
     "difficulty": "advanced",
     "question": "Find customers who have ordered products from at least 3 different categories",
     "hint": "SELECT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) >= 3",
-    "generatedAt": "2026-01-10T20:20:13.714Z"
+    "generatedAt": "2026-01-10T20:20:13.714Z",
+    "fingerprint": "customers-products-categories-count-having"
   },
   {
     "id": "q_1768076424372_6nsafp",
     "difficulty": "advanced",
     "question": "Find customers who have ordered products from at least three different categories",
     "hint": "SELECT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(p.category) >= 3",
-    "generatedAt": "2026-01-10T20:20:24.372Z"
+    "generatedAt": "2026-01-10T20:20:24.372Z",
+    "fingerprint": "customers-products-categories-count-min"
   },
   {
     "id": "q_1768076434640_zfb422",
     "difficulty": "advanced",
     "question": "Find customers who have ordered products from at least 3 different categories",
     "hint": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name, c.email\nHAVING COUNT(p.category) >= 3",
-    "generatedAt": "2026-01-10T20:20:34.640Z"
+    "generatedAt": "2026-01-10T20:20:34.640Z",
+    "fingerprint": "customers-products-categories-count-threshold"
   },
   {
     "id": "q_1768076444944_poi01l",
     "difficulty": "advanced",
     "question": "Find customers who have ordered products from at least 3 different categories",
     "hint": "SELECT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(p.category) >= 3",
-    "generatedAt": "2026-01-10T20:20:44.944Z"
+    "generatedAt": "2026-01-10T20:20:44.944Z",
+    "fingerprint": "customers-products-categories-count-min"
   }
 ]
