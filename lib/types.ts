@@ -59,6 +59,7 @@ export interface CachedQuestion {
   id: string;
   difficulty: UserLevel;
   question: string;
+  fingerprint?: string;
   hint: string;
   generatedAt: string;
 }

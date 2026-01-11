@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync, existsSync } from "fs";
 import path from "path";
 import { generateQuestion } from "../lib/question-generator";
 import { generateHintQuery } from "../lib/orchestrator";
+import { generateFingerprint } from "../lib/fingerprint-generator";
 import { CachedQuestion, UserLevel } from "../lib/types";
 
 // Default schema (same as in app/page.tsx)
@@ -146,10 +147,17 @@ async function generateQuestionWithHints(
     userLevel: difficulty,
   });
 
+  // Small delay before fingerprint generation
+  await sleep(300);
+
+  // Generate fingerprint for deduplication
+  const fingerprint = await generateFingerprint(questionResponse.question);
+
   return {
     id: generateId(),
     difficulty,
     question: questionResponse.question,
+    fingerprint,
     hint: hintResponse.hintQuery,
     generatedAt: new Date().toISOString(),
   };
