@@ -19,11 +19,12 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Required for Next.js
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net blob:", // Required for Next.js and Monaco Editor
               "style-src 'self' 'unsafe-inline'", // Required for styled-jsx and inline styles
               "img-src 'self' data: blob:",
-              "font-src 'self'",
-              "connect-src 'self'",
+              "font-src 'self' https://cdn.jsdelivr.net",
+              "connect-src 'self' https://cdn.jsdelivr.net",
+              "worker-src 'self' blob:", // Required for Monaco Editor web workers
               "frame-ancestors 'none'",
             ].join("; "),
           },
