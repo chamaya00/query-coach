@@ -1198,5 +1198,1205 @@
     "fingerprint": "products-orders-category-revenue-percentage-completed",
     "hint": "SELECT \n    p.category,\n    SUM(oi.quantity * oi.unit_price) as category_revenue,\n    SUM(oi.quantity * oi.unit_price) * 100.0 / \n        (SELECT SUM(oi2.quantity * oi2.unit_price) \n         FROM order_items oi2 \n         JOIN orders o2 ON oi2.order_id = o2.id \n         WHERE o2.status = 'completed') as revenue_percentage\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status = 'completed'\nGROUP BY p.category;",
     "generatedAt": "2026-01-11T06:54:38.077Z"
+  },
+  {
+    "id": "q_1768166040691_0lqroj",
+    "difficulty": "beginner",
+    "question": "Find all customers who joined in February 2023",
+    "fingerprint": "customers-joindate-month-year-equals",
+    "hint": "SELECT name, email, region, created_at \nFROM customers \nWHERE created_at BETWEEN '2023-02-01' AND '2023-02-28'",
+    "generatedAt": "2026-01-11T21:14:00.691Z"
+  },
+  {
+    "id": "q_1768166048521_gsnxa8",
+    "difficulty": "beginner",
+    "question": "Find all orders placed in February 2024",
+    "fingerprint": "orders-date-february-filter",
+    "hint": "SELECT id, customer_id, order_date, status, total_amount\nFROM orders\nWHERE order_date >= '2024-02-01' AND order_date < '2024-03-01'",
+    "generatedAt": "2026-01-11T21:14:08.521Z"
+  },
+  {
+    "id": "q_1768166056110_hu38kl",
+    "difficulty": "beginner",
+    "question": "Find all products with a stock quantity of exactly 100",
+    "fingerprint": "products-stock-equals",
+    "hint": "SELECT name, category, price, stock_quantity \nFROM products \nWHERE stock_quantity = '100'",
+    "generatedAt": "2026-01-11T21:14:16.110Z"
+  },
+  {
+    "id": "q_1768166063833_knnrcl",
+    "difficulty": "beginner",
+    "question": "Find all products with a stock quantity less than 100",
+    "fingerprint": "products-stock-less-than",
+    "hint": "SELECT name, category, price, stock_qty \nFROM products \nWHERE stock_quantity < 100;",
+    "generatedAt": "2026-01-11T21:14:23.833Z"
+  },
+  {
+    "id": "q_1768166072215_5pil5u",
+    "difficulty": "beginner",
+    "question": "Find all orders with a status of 'shipped'",
+    "fingerprint": "orders-status-equals",
+    "hint": "SELECT * FROM orders WHERE status = 'ship';",
+    "generatedAt": "2026-01-11T21:14:32.215Z"
+  },
+  {
+    "id": "q_1768166079779_z0j87k",
+    "difficulty": "beginner",
+    "question": "Show the name and email of all customers in the Central region",
+    "fingerprint": "customers-name-email-region-equals",
+    "hint": "SELECT name, email FROM customers WHERE region = 'central'",
+    "generatedAt": "2026-01-11T21:14:39.779Z"
+  },
+  {
+    "id": "q_1768166087270_q1sphj",
+    "difficulty": "beginner",
+    "question": "Find all products that cost more than $100",
+    "fingerprint": "products-price-greater",
+    "hint": "SELECT name, price FROM products WHERE price >= 100;",
+    "generatedAt": "2026-01-11T21:14:47.270Z"
+  },
+  {
+    "id": "q_1768166094287_hoy7p1",
+    "difficulty": "beginner",
+    "question": "Find all customers who created their account in March 2023",
+    "fingerprint": "customers-created-date-month-equals",
+    "hint": "SELECT name, email, region \nFROM customers \nWHERE created_at LIKE '2023-03%'",
+    "generatedAt": "2026-01-11T21:14:54.287Z"
+  },
+  {
+    "id": "q_1768166101192_l09kpw",
+    "difficulty": "beginner",
+    "question": "Find the cheapest product in the database",
+    "fingerprint": "products-price-min",
+    "hint": "SELECT name, price FROM products WHERE price = MIN(price);",
+    "generatedAt": "2026-01-11T21:15:01.192Z"
+  },
+  {
+    "id": "q_1768166108855_ipbjhw",
+    "difficulty": "beginner",
+    "question": "Find all customers who joined in February 2023",
+    "fingerprint": "customers-joindate-month-equals",
+    "hint": "SELECT name, email, region\nFROM customers\nWHERE created_at >= '2023-02-01' AND created_at < '2023-03-01'",
+    "generatedAt": "2026-01-11T21:15:08.855Z"
+  },
+  {
+    "id": "q_1768166117058_nxl65i",
+    "difficulty": "beginner",
+    "question": "Find all products with a stock quantity of exactly 100",
+    "fingerprint": "products-stock-equals",
+    "hint": "SELECT name, category, price, stock_quantity \nFROM products \nWHERE stock_quantity = '100'",
+    "generatedAt": "2026-01-11T21:15:17.058Z"
+  },
+  {
+    "id": "q_1768166124889_0jd9jo",
+    "difficulty": "beginner",
+    "question": "Find all products in the Appliances category",
+    "fingerprint": "products-category-equals",
+    "hint": "SELECT name, price, stock_quantity\nFROM products\nWHERE category = 'Appliance';",
+    "generatedAt": "2026-01-11T21:15:24.889Z"
+  },
+  {
+    "id": "q_1768166132419_n2kbvc",
+    "difficulty": "beginner",
+    "question": "Find all products with stock quantity below 100",
+    "fingerprint": "products-stock-below",
+    "hint": "SELECT id, name, category, price, stock_quantity\nFROM products\nWHERE stock_quantity <= 100;",
+    "generatedAt": "2026-01-11T21:15:32.419Z"
+  },
+  {
+    "id": "q_1768166142461_o5gxc7",
+    "difficulty": "beginner",
+    "question": "Show all order items with a quantity of 1",
+    "fingerprint": "order-items-quantity-equals",
+    "hint": "SELECT * FROM order_items WHERE quantity = '1'",
+    "generatedAt": "2026-01-11T21:15:42.461Z"
+  },
+  {
+    "id": "q_1768166162002_fpazli",
+    "difficulty": "beginner",
+    "question": "Find all customers who created their account in March 2023",
+    "fingerprint": "customers-created-date-month",
+    "hint": "SELECT name, email, region, created_at\nFROM customers\nWHERE created_at LIKE '2023-03%'",
+    "generatedAt": "2026-01-11T21:16:02.002Z"
+  },
+  {
+    "id": "q_1768166174627_27haqk",
+    "difficulty": "beginner",
+    "question": "Find all customers who created their account in February 2023",
+    "fingerprint": "customers-created-date-equals",
+    "hint": "SELECT id, name, email, region, created_at \nFROM customers \nWHERE created_at >= '2023-02-01' AND created_at < '2023-03-01'",
+    "generatedAt": "2026-01-11T21:16:14.627Z"
+  },
+  {
+    "id": "q_1768166186769_e88pk9",
+    "difficulty": "beginner",
+    "question": "Find all customers who created their account in 2023",
+    "fingerprint": "customers-created-year-equals",
+    "hint": "SELECT id, name, email, region, created_at\nFROM customers\nWHERE YEAR(created_at) = 2023",
+    "generatedAt": "2026-01-11T21:16:26.769Z"
+  },
+  {
+    "id": "q_1768166198348_9tqrwx",
+    "difficulty": "beginner",
+    "question": "Find all customers who created their account in March 2023",
+    "fingerprint": "customers-createddate-march-2023",
+    "hint": "SELECT id, name, email, region, created_at \nFROM customers \nWHERE created_at LIKE '2023-03%'",
+    "generatedAt": "2026-01-11T21:16:38.348Z"
+  },
+  {
+    "id": "q_1768166210006_uqw0rm",
+    "difficulty": "beginner",
+    "question": "Find all orders placed in January 2024",
+    "fingerprint": "orders-date-january-equals",
+    "hint": "SELECT * FROM orders WHERE order_date >= '2024-01-01' AND order_date < '2024-02-01'",
+    "generatedAt": "2026-01-11T21:16:50.006Z"
+  },
+  {
+    "id": "q_1768166223338_uoes7a",
+    "difficulty": "beginner",
+    "question": "Find all products with a stock quantity less than 100",
+    "fingerprint": "products-stock-less-than",
+    "hint": "SELECT name, category, price, stock_qty\nFROM products\nWHERE stock_quantity < 100;",
+    "generatedAt": "2026-01-11T21:17:03.338Z"
+  },
+  {
+    "id": "q_1768166234864_n4jdvg",
+    "difficulty": "beginner",
+    "question": "Find all products with a name that starts with the letter 'D'",
+    "fingerprint": "products-name-starts-with",
+    "hint": "SELECT * FROM products WHERE name LIKE 'D%';",
+    "generatedAt": "2026-01-11T21:17:14.864Z"
+  },
+  {
+    "id": "q_1768166246534_ybnub6",
+    "difficulty": "beginner",
+    "question": "Find all customers who created their account in 2023",
+    "fingerprint": "customers-created-year-equals",
+    "hint": "SELECT id, name, email, region, created_at \nFROM customers \nWHERE created_at LIKE '2023%'",
+    "generatedAt": "2026-01-11T21:17:26.534Z"
+  },
+  {
+    "id": "q_1768166258381_crumsa",
+    "difficulty": "beginner",
+    "question": "Find all products in the Home category",
+    "fingerprint": "products-category-equals",
+    "hint": "SELECT id, name, price, stock_quantity\nFROM products\nWHERE category = 'home';",
+    "generatedAt": "2026-01-11T21:17:38.381Z"
+  },
+  {
+    "id": "q_1768166270782_inc2xy",
+    "difficulty": "beginner",
+    "question": "Find all customers who created their account in 2023",
+    "fingerprint": "customers-created-year-equals",
+    "hint": "SELECT id, name, email, region, created_at\nFROM customers\nWHERE created_at >= '2023-01-01' AND created_at <= '2023-12-31'",
+    "generatedAt": "2026-01-11T21:17:50.782Z"
+  },
+  {
+    "id": "q_1768166282882_acua40",
+    "difficulty": "beginner",
+    "question": "Find all products with a stock quantity above 100",
+    "fingerprint": "products-stock-above",
+    "hint": "SELECT name, category, price, stock_qty\nFROM products\nWHERE stock_quantity > 100;",
+    "generatedAt": "2026-01-11T21:18:02.882Z"
+  },
+  {
+    "id": "q_1768166295570_3p566r",
+    "difficulty": "beginner",
+    "question": "Find all products with a stock quantity greater than 100",
+    "fingerprint": "products-stock-greater",
+    "hint": "SELECT name, category, price, stock_qty \nFROM products \nWHERE stock_quantity > 100;",
+    "generatedAt": "2026-01-11T21:18:15.570Z"
+  },
+  {
+    "id": "q_1768166315857_6ie7x4",
+    "difficulty": "beginner",
+    "question": "Find all customers who joined before April 2023",
+    "fingerprint": "customers-joined-before",
+    "hint": "SELECT customer_name, email, region, created_at \nFROM customers \nWHERE created_at < '2023-04-01'",
+    "generatedAt": "2026-01-11T21:18:35.857Z"
+  },
+  {
+    "id": "q_1768166328598_hdt4mi",
+    "difficulty": "beginner",
+    "question": "Find all products in the Appliances category",
+    "fingerprint": "products-category-equals",
+    "hint": "SELECT id, name, price, stock_quantity \nFROM products \nWHERE category = 'Appliance'",
+    "generatedAt": "2026-01-11T21:18:48.598Z"
+  },
+  {
+    "id": "q_1768166340248_thnicn",
+    "difficulty": "beginner",
+    "question": "Find all customers who created their account in January 2023",
+    "fingerprint": "customers-created-date-equals",
+    "hint": "SELECT id, name, email, region, created_at\nFROM customers\nWHERE created_at >= '2023-01-01' AND created_at < '2023-02-01'",
+    "generatedAt": "2026-01-11T21:19:00.248Z"
+  },
+  {
+    "id": "q_1768166351759_8srk53",
+    "difficulty": "beginner",
+    "question": "Find all orders with a total amount greater than 100",
+    "fingerprint": "orders-total-greater",
+    "hint": "SELECT * FROM orders WHERE total_amount > 100.00",
+    "generatedAt": "2026-01-11T21:19:11.759Z"
+  },
+  {
+    "id": "q_1768166364882_8te6b2",
+    "difficulty": "beginner",
+    "question": "Count how many orders have been shipped",
+    "fingerprint": "orders-shipped-count",
+    "hint": "SELECT COUNT(*) FROM orders WHERE status = 'ship';",
+    "generatedAt": "2026-01-11T21:19:24.882Z"
+  },
+  {
+    "id": "q_1768166376508_y4yn75",
+    "difficulty": "beginner",
+    "question": "Find all products in the Home category",
+    "fingerprint": "products-category-equals",
+    "hint": "SELECT id, name, price, stock_quantity\nFROM products\nWHERE categories = 'Home';",
+    "generatedAt": "2026-01-11T21:19:36.508Z"
+  },
+  {
+    "id": "q_1768166388789_lbuwo7",
+    "difficulty": "beginner",
+    "question": "Find the average price of products in the Home category",
+    "fingerprint": "products-home-category-avg",
+    "hint": "SELECT AVG(price) FROM products WHERE category = 'Home'",
+    "generatedAt": "2026-01-11T21:19:48.789Z"
+  },
+  {
+    "id": "q_1768166402112_p1syk7",
+    "difficulty": "beginner",
+    "question": "Find all products with a stock quantity of exactly 75",
+    "fingerprint": "products-stock-equals",
+    "hint": "SELECT name, category, price, stock_quantity \nFROM products \nWHERE stock_quantity = 75",
+    "generatedAt": "2026-01-11T21:20:02.112Z"
+  },
+  {
+    "id": "q_1768166413529_gjrkid",
+    "difficulty": "beginner",
+    "question": "Find all customers who joined in February 2023",
+    "fingerprint": "customers-joindate-month-year-equals",
+    "hint": "SELECT name, email, region \nFROM customers \nWHERE created_at >= '2023-02-01' AND created_at < '2023-03-01'",
+    "generatedAt": "2026-01-11T21:20:13.529Z"
+  },
+  {
+    "id": "q_1768166426043_iy77uc",
+    "difficulty": "beginner",
+    "question": "Find all customers who joined in February 2023",
+    "fingerprint": "customers-joined-date-equals",
+    "hint": "SELECT name, email, region\nFROM customers\nWHERE created_at LIKE '2023-02%'",
+    "generatedAt": "2026-01-11T21:20:26.043Z"
+  },
+  {
+    "id": "q_1768166438076_2uhdkz",
+    "difficulty": "beginner",
+    "question": "Show the name and price of all products with a price greater than $100",
+    "fingerprint": "products-name-price-greater",
+    "hint": "SELECT name, price FROM products WHERE price > 100;",
+    "generatedAt": "2026-01-11T21:20:38.076Z"
+  },
+  {
+    "id": "q_1768166451219_2t7e19",
+    "difficulty": "beginner",
+    "question": "Show the name and email of customers from the Central region",
+    "fingerprint": "customers-region-equals",
+    "hint": "SELECT name, email FROM customers WHERE region = 'central'",
+    "generatedAt": "2026-01-11T21:20:51.219Z"
+  },
+  {
+    "id": "q_1768166462862_tirhu7",
+    "difficulty": "beginner",
+    "question": "Find all orders placed in February 2024",
+    "fingerprint": "orders-date-february-2024",
+    "hint": "SELECT * FROM orders WHERE order_date >= '2024-02-01' AND order_date < '2024-03-01'",
+    "generatedAt": "2026-01-11T21:21:02.862Z"
+  },
+  {
+    "id": "q_1768166475460_63cj0c",
+    "difficulty": "beginner",
+    "question": "Find all products with stock quantity below 100",
+    "fingerprint": "products-stock-below",
+    "hint": "SELECT name, category, price, stock_quantity \nFROM products \nWHERE stock_quantity <= 100",
+    "generatedAt": "2026-01-11T21:21:15.461Z"
+  },
+  {
+    "id": "q_1768166487838_2ks504",
+    "difficulty": "beginner",
+    "question": "Find all products with a price under $50",
+    "fingerprint": "products-price-under",
+    "hint": "SELECT name, price FROM products WHERE price <= 50;",
+    "generatedAt": "2026-01-11T21:21:27.838Z"
+  },
+  {
+    "id": "q_1768166500525_i60h4t",
+    "difficulty": "beginner",
+    "question": "Find all products in the Appliances category",
+    "fingerprint": "products-category-equals",
+    "hint": "SELECT name, price\nFROM products\nWHERE category = 'Appliance';",
+    "generatedAt": "2026-01-11T21:21:40.525Z"
+  },
+  {
+    "id": "q_1768166512488_qon91f",
+    "difficulty": "beginner",
+    "question": "Find all orders placed in January 2024",
+    "fingerprint": "orders-date-january-filter",
+    "hint": "SELECT * FROM orders WHERE order_date >= '2024-01-01' AND order_date < '2024-02-01'",
+    "generatedAt": "2026-01-11T21:21:52.488Z"
+  },
+  {
+    "id": "q_1768166524983_4c8i79",
+    "difficulty": "beginner",
+    "question": "Find all customers with an email address containing \"gmail\"",
+    "fingerprint": "customers-email-contains",
+    "hint": "SELECT id, name, email, region, created_at\nFROM customers\nWHERE email LIKE '%gmail%'",
+    "generatedAt": "2026-01-11T21:22:04.983Z"
+  },
+  {
+    "id": "q_1768166537269_w09ky7",
+    "difficulty": "beginner",
+    "question": "Find all products in the Appliances category",
+    "fingerprint": "products-category-equals",
+    "hint": "SELECT name, category, price \nFROM products \nWHERE category = 'Appliance'",
+    "generatedAt": "2026-01-11T21:22:17.269Z"
+  },
+  {
+    "id": "q_1768166550127_xi2ydo",
+    "difficulty": "beginner",
+    "question": "Find all orders placed after January 20th, 2024",
+    "fingerprint": "orders-date-after",
+    "hint": "SELECT * FROM orders WHERE order_date > '2024-01-20'",
+    "generatedAt": "2026-01-11T21:22:30.127Z"
+  },
+  {
+    "id": "q_1768166561927_uf2jnv",
+    "difficulty": "beginner",
+    "question": "Find all products with more than 100 items in stock",
+    "fingerprint": "products-stock-greater",
+    "hint": "SELECT name, category, price, stock_quantity \nFROM products \nWHERE stock_quantity >= 100",
+    "generatedAt": "2026-01-11T21:22:41.927Z"
+  },
+  {
+    "id": "q_1768166575051_4uzoel",
+    "difficulty": "beginner",
+    "question": "Find all products with stock quantity below 100",
+    "fingerprint": "products-stock-below",
+    "hint": "SELECT name, category, price, stock_quantity \nFROM products \nWHERE stock_quantity <= 100;",
+    "generatedAt": "2026-01-11T21:22:55.051Z"
+  },
+  {
+    "id": "q_1768166587108_e66igw",
+    "difficulty": "beginner",
+    "question": "Find all orders that are currently pending",
+    "fingerprint": "orders-status-equals",
+    "hint": "SELECT * FROM orders WHERE status = 'Pending'",
+    "generatedAt": "2026-01-11T21:23:07.108Z"
+  },
+  {
+    "id": "q_1768166600135_ej2ft4",
+    "difficulty": "beginner",
+    "question": "Find all products with a stock quantity above 100",
+    "fingerprint": "products-stock-above",
+    "hint": "SELECT name, category, price, stock_qty \nFROM products \nWHERE stock_quantity > 100;",
+    "generatedAt": "2026-01-11T21:23:20.135Z"
+  },
+  {
+    "id": "q_1768166613285_83o8sj",
+    "difficulty": "intermediate",
+    "question": "Find the average order value for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) as average_order_value\nFROM orders\nGROUP BY status\nHAVING COUNT(*) > 2",
+    "generatedAt": "2026-01-11T21:23:33.285Z"
+  },
+  {
+    "id": "q_1768166624107_c9nhds",
+    "difficulty": "intermediate",
+    "question": "Find customers who have orders in both January and February 2024",
+    "fingerprint": "customers-orders-months-both-exists",
+    "hint": "SELECT DISTINCT c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+    "generatedAt": "2026-01-11T21:23:44.107Z"
+  },
+  {
+    "id": "q_1768166635768_ks2l2q",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product purchased by each customer",
+    "fingerprint": "customers-products-max-price-group",
+    "hint": "SELECT c.name, p.name, MAX(oi.unit_price) as max_price\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.name\nORDER BY max_price DESC",
+    "generatedAt": "2026-01-11T21:23:55.768Z"
+  },
+  {
+    "id": "q_1768166648796_9ltlzy",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product purchased by each customer along with the customer's name",
+    "fingerprint": "customers-products-orders-max-price-join",
+    "hint": "SELECT c.name, p.name, MAX(oi.unit_price)\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name",
+    "generatedAt": "2026-01-11T21:24:08.796Z"
+  },
+  {
+    "id": "q_1768166661030_sis6at",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product purchased by customers in each region",
+    "fingerprint": "products-customers-region-price-max-group",
+    "hint": "SELECT c.region, p.name, p.price\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE p.price = (\n    SELECT MAX(p2.price)\n    FROM customers c2\n    JOIN orders o2 ON c2.id = o2.customer_id\n    JOIN order_items oi2 ON o2.id = oi2.order_id\n    JOIN products p2 ON oi2.product_id = p2.id\n)\nGROUP BY c.region, p.name, p.price",
+    "generatedAt": "2026-01-11T21:24:21.030Z"
+  },
+  {
+    "id": "q_1768166672381_fjzex3",
+    "difficulty": "intermediate",
+    "question": "Find customers who have placed orders in both January and February 2024",
+    "fingerprint": "customers-orders-months-both",
+    "hint": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+    "generatedAt": "2026-01-11T21:24:32.381Z"
+  },
+  {
+    "id": "q_1768166685404_w9ltlq",
+    "difficulty": "intermediate",
+    "question": "Find the average order value for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) as avg_order_value\nFROM orders\nGROUP BY status\nHAVING COUNT(*) > 0",
+    "generatedAt": "2026-01-11T21:24:45.404Z"
+  },
+  {
+    "id": "q_1768166697022_wp0ecj",
+    "difficulty": "intermediate",
+    "question": "Find products that have been ordered more than twice",
+    "fingerprint": "products-orders-count-greater",
+    "hint": "SELECT p.name, COUNT(oi.product_id) as order_count\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE COUNT(oi.product_id) > 2\nGROUP BY p.id, p.name",
+    "generatedAt": "2026-01-11T21:24:57.022Z"
+  },
+  {
+    "id": "q_1768166708925_dv0ei7",
+    "difficulty": "intermediate",
+    "question": "Show the average order value for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) as avg_order_value\nFROM orders\nGROUP BY status\nHAVING COUNT(*) > 0\nORDER BY avg_order_value DESC",
+    "generatedAt": "2026-01-11T21:25:08.925Z"
+  },
+  {
+    "id": "q_1768166722021_samztq",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product sold in each order",
+    "fingerprint": "products-orders-price-max-group",
+    "hint": "SELECT o.id as order_id, p.name as product_name, oi.unit_price\nFROM orders o\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY o.id\nHAVING oi.unit_price = MAX(oi.unit_price)\nORDER BY o.id",
+    "generatedAt": "2026-01-11T21:25:22.021Z"
+  },
+  {
+    "id": "q_1768166733703_friobv",
+    "difficulty": "intermediate",
+    "question": "Find the total value of items ordered for each product category",
+    "fingerprint": "products-orders-category-value-sum-group",
+    "hint": "SELECT \n    p.category,\n    SUM(oi.quantity * oi.unit_price) AS total_value\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE p.category IS NOT NULL\nGROUP BY p.category;",
+    "generatedAt": "2026-01-11T21:25:33.703Z"
+  },
+  {
+    "id": "q_1768166745519_h11h8z",
+    "difficulty": "intermediate",
+    "question": "Find the most recent order date for each customer",
+    "fingerprint": "customers-orders-date-max-group",
+    "hint": "SELECT c.name, MAX(o.order_date) as most_recent_order\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.status = 'completed'\nGROUP BY c.name",
+    "generatedAt": "2026-01-11T21:25:45.519Z"
+  },
+  {
+    "id": "q_1768166758733_gh4jvx",
+    "difficulty": "intermediate",
+    "question": "Find the average order total for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) as avg_order_total\nFROM orders\nWHERE status IN ('completed', 'pending', 'shipped')\nGROUP BY status\nHAVING AVG(total_amount) > 0",
+    "generatedAt": "2026-01-11T21:25:58.733Z"
+  },
+  {
+    "id": "q_1768166771175_prrm38",
+    "difficulty": "intermediate",
+    "question": "Show the total quantity sold for each product along with its category",
+    "fingerprint": "products-category-quantity-sum-group",
+    "hint": "SELECT p.name, p.category, SUM(oi.quantity) as total_sold\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE p.category IS NOT NULL\nGROUP BY p.name, p.category\nORDER BY total_sold DESC;",
+    "generatedAt": "2026-01-11T21:26:11.175Z"
+  },
+  {
+    "id": "q_1768166783187_r8vjy1",
+    "difficulty": "intermediate",
+    "question": "Find the average order value for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) as average_order_value\nFROM orders\nGROUP BY status\nHAVING COUNT(*) > 0",
+    "generatedAt": "2026-01-11T21:26:23.187Z"
+  },
+  {
+    "id": "q_1768166795856_ewgt8p",
+    "difficulty": "intermediate",
+    "question": "Find the total quantity sold for each product across all completed orders",
+    "fingerprint": "products-orders-quantity-sum-group",
+    "hint": "SELECT p.name, SUM(oi.quantity) as total_sold\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status = 'completed'\nGROUP BY p.name",
+    "generatedAt": "2026-01-11T21:26:35.856Z"
+  },
+  {
+    "id": "q_1768166807624_g9eshe",
+    "difficulty": "intermediate",
+    "question": "Find the total quantity ordered for each product along with the product name",
+    "fingerprint": "products-orders-quantity-sum-group",
+    "hint": "SELECT p.name, SUM(oi.quantity) as total_quantity\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE p.stock_quantity > 0\nGROUP BY p.name",
+    "generatedAt": "2026-01-11T21:26:47.624Z"
+  },
+  {
+    "id": "q_1768166820599_3g98mq",
+    "difficulty": "intermediate",
+    "question": "Find products that have been ordered by customers from at least 2 different regions",
+    "fingerprint": "products-customers-regions-count-threshold",
+    "hint": "SELECT DISTINCT p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nGROUP BY p.id, p.name\nHAVING COUNT(c.region) >= 2",
+    "generatedAt": "2026-01-11T21:27:00.599Z"
+  },
+  {
+    "id": "q_1768166832017_bxorjb",
+    "difficulty": "intermediate",
+    "question": "Find the total value of orders that are currently pending or shipped",
+    "fingerprint": "orders-status-sum-filter",
+    "hint": "SELECT SUM(total_amount) AS total_value\nFROM orders\nWHERE status IN ('pending', 'shipped')\nGROUP BY status;",
+    "generatedAt": "2026-01-11T21:27:12.017Z"
+  },
+  {
+    "id": "q_1768166845148_ncql44",
+    "difficulty": "intermediate",
+    "question": "Find the average order value for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) as avg_order_value\nFROM orders\nWHERE status IN ('completed', 'pending', 'shipped')\nGROUP BY status",
+    "generatedAt": "2026-01-11T21:27:25.148Z"
+  },
+  {
+    "id": "q_1768166857668_054fa1",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product sold in each order",
+    "fingerprint": "products-orders-max-group",
+    "hint": "SELECT o.id as order_id, p.name, p.price\nFROM orders o\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY o.id\nHAVING p.price = MAX(p.price)\nORDER BY o.id",
+    "generatedAt": "2026-01-11T21:27:37.668Z"
+  },
+  {
+    "id": "q_1768166870443_kut2pt",
+    "difficulty": "intermediate",
+    "question": "Find the average order total for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount)\nFROM orders\nGROUP BY status\nHAVING COUNT(*) > 2",
+    "generatedAt": "2026-01-11T21:27:50.443Z"
+  },
+  {
+    "id": "q_1768166882157_dxuori",
+    "difficulty": "intermediate",
+    "question": "Find the names of customers who have ordered products from at least 2 different categories",
+    "fingerprint": "customers-products-categories-count-min",
+    "hint": "SELECT DISTINCT c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nHAVING COUNT(p.category) >= 2",
+    "generatedAt": "2026-01-11T21:28:02.157Z"
+  },
+  {
+    "id": "q_1768166895207_593bd5",
+    "difficulty": "intermediate",
+    "question": "Find products that have been ordered by customers from at least 2 different regions",
+    "fingerprint": "products-customers-regions-count-min",
+    "hint": "SELECT DISTINCT p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nGROUP BY p.id, p.name\nHAVING COUNT(c.region) >= 2",
+    "generatedAt": "2026-01-11T21:28:15.207Z"
+  },
+  {
+    "id": "q_1768166907609_6cvlua",
+    "difficulty": "intermediate",
+    "question": "Find customers who have made purchases in both January and February 2024",
+    "fingerprint": "customers-orders-months-both-exists",
+    "hint": "SELECT c.name, c.email\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE EXTRACT(MONTH FROM o.order_date) IN (1, 2) \n  AND EXTRACT(YEAR FROM o.order_date) = 2024\nGROUP BY c.id, c.name, c.email\nHAVING COUNT(DISTINCT EXTRACT(MONTH FROM o.order_date)) = 2",
+    "generatedAt": "2026-01-11T21:28:27.609Z"
+  },
+  {
+    "id": "q_1768166920176_96bnwg",
+    "difficulty": "intermediate",
+    "question": "Find all products that have never been ordered",
+    "fingerprint": "products-orders-not-exists",
+    "hint": "SELECT p.id, p.name, p.category, p.price\nFROM products p\nLEFT JOIN order_items oi ON p.id = oi.product_id\nWHERE oi.product_id IS NULL\nGROUP BY p.id, p.name, p.category, p.price",
+    "generatedAt": "2026-01-11T21:28:40.176Z"
+  },
+  {
+    "id": "q_1768166933735_z152yn",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product ordered by each customer",
+    "fingerprint": "customers-products-orders-max-group",
+    "hint": "SELECT c.name, p.name as product_name, p.price\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE p.price = (\n    SELECT MAX(p2.price)\n    FROM products p2\n    JOIN order_items oi2 ON p2.id = oi2.product_id\n    JOIN orders o2 ON oi2.order_id = o2.id\n)\nGROUP BY c.id, c.name, p.name, p.price;",
+    "generatedAt": "2026-01-11T21:28:53.735Z"
+  },
+  {
+    "id": "q_1768166945504_wgvinh",
+    "difficulty": "intermediate",
+    "question": "Find the average order value for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) as avg_order_value\nFROM orders\nGROUP BY status\nHAVING COUNT(*) > 2",
+    "generatedAt": "2026-01-11T21:29:05.504Z"
+  },
+  {
+    "id": "q_1768166957245_hbx5oj",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product ordered by customers from each region",
+    "fingerprint": "products-customers-region-price-max-group",
+    "hint": "SELECT c.region, p.name, MAX(p.price) as max_price\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.region",
+    "generatedAt": "2026-01-11T21:29:17.245Z"
+  },
+  {
+    "id": "q_1768166970048_j4nn8v",
+    "difficulty": "intermediate",
+    "question": "Find the average order total for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) as average_total\nFROM orders\nWHERE status = 'completed'\nGROUP BY status",
+    "generatedAt": "2026-01-11T21:29:30.048Z"
+  },
+  {
+    "id": "q_1768166982972_8oic5y",
+    "difficulty": "intermediate",
+    "question": "Find customers who have made purchases in both January and February 2024",
+    "fingerprint": "customers-purchases-months-both-exists",
+    "hint": "SELECT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')\nGROUP BY c.id, c.name\nHAVING COUNT(*) >= 2",
+    "generatedAt": "2026-01-11T21:29:42.972Z"
+  },
+  {
+    "id": "q_1768166995596_s0eoia",
+    "difficulty": "intermediate",
+    "question": "Find customers who have placed orders in both January and February 2024",
+    "fingerprint": "customers-orders-months-both",
+    "hint": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+    "generatedAt": "2026-01-11T21:29:55.596Z"
+  },
+  {
+    "id": "q_1768167008207_tc5bmt",
+    "difficulty": "intermediate",
+    "question": "Find products that have been ordered by customers from at least 2 different regions",
+    "fingerprint": "products-customers-regions-count-threshold",
+    "hint": "SELECT DISTINCT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nGROUP BY p.id, p.name\nHAVING COUNT(c.region) >= 2",
+    "generatedAt": "2026-01-11T21:30:08.207Z"
+  },
+  {
+    "id": "q_1768167021388_ys5fha",
+    "difficulty": "intermediate",
+    "question": "Find products that have been ordered by customers from at least 2 different regions",
+    "fingerprint": "products-customers-regions-count-min",
+    "hint": "SELECT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nWHERE c.region IS NOT NULL\nGROUP BY p.id, p.name\nHAVING COUNT(c.region) >= 2",
+    "generatedAt": "2026-01-11T21:30:21.388Z"
+  },
+  {
+    "id": "q_1768167033911_r0803t",
+    "difficulty": "intermediate",
+    "question": "Find the most popular product in each category based on total quantity sold",
+    "fingerprint": "products-category-quantity-max-group",
+    "hint": "SELECT p.category, p.name, SUM(oi.quantity) as total_sold\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE total_sold = (\n    SELECT MAX(SUM(oi2.quantity))\n    FROM products p2\n    JOIN order_items oi2 ON p2.id = oi2.product_id\n    WHERE p2.category = p.category\n    GROUP BY p2.id\n)\nGROUP BY p.category, p.name",
+    "generatedAt": "2026-01-11T21:30:33.911Z"
+  },
+  {
+    "id": "q_1768167047266_qlr12v",
+    "difficulty": "intermediate",
+    "question": "Find the average order value for each order status",
+    "fingerprint": "orders-status-avg-group",
+    "hint": "SELECT status, AVG(total_amount) AS avg_order_value\nFROM orders\nWHERE status IN ('completed', 'pending', 'shipped')\nGROUP BY status\nHAVING AVG(total_amount) > 0;",
+    "generatedAt": "2026-01-11T21:30:47.266Z"
+  },
+  {
+    "id": "q_1768167058833_8seocr",
+    "difficulty": "intermediate",
+    "question": "Find the total quantity sold for each product category",
+    "fingerprint": "products-orders-category-sum-group",
+    "hint": "SELECT p.category, SUM(oi.quantity) as total_quantity\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status = 'completed'\nGROUP BY p.category",
+    "generatedAt": "2026-01-11T21:30:58.833Z"
+  },
+  {
+    "id": "q_1768167072773_t4wqha",
+    "difficulty": "intermediate",
+    "question": "Find all products that have been ordered more than once",
+    "fingerprint": "products-orders-count-greater",
+    "hint": "SELECT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE COUNT(oi.product_id) > 1\nGROUP BY p.id, p.name",
+    "generatedAt": "2026-01-11T21:31:12.773Z"
+  },
+  {
+    "id": "q_1768167084396_gyz96y",
+    "difficulty": "intermediate",
+    "question": "Find the most popular product in each category based on order frequency",
+    "fingerprint": "products-category-orders-frequency-max-group",
+    "hint": "SELECT \n    p.category,\n    p.name,\n    COUNT(*) as order_frequency\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nGROUP BY p.category\nORDER BY order_frequency DESC;",
+    "generatedAt": "2026-01-11T21:31:24.396Z"
+  },
+  {
+    "id": "q_1768167097620_d2s9jk",
+    "difficulty": "intermediate",
+    "question": "Find customers who have made orders in both January and February 2024",
+    "fingerprint": "customers-orders-months-both-exists",
+    "hint": "SELECT DISTINCT c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+    "generatedAt": "2026-01-11T21:31:37.620Z"
+  },
+  {
+    "id": "q_1768167110812_vcpk9h",
+    "difficulty": "intermediate",
+    "question": "Find customers who have made orders in both January and February 2024",
+    "fingerprint": "customers-orders-months-both-exists",
+    "hint": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+    "generatedAt": "2026-01-11T21:31:50.812Z"
+  },
+  {
+    "id": "q_1768167123677_lfu61d",
+    "difficulty": "intermediate",
+    "question": "Find customers who have ordered products from at least 2 different categories",
+    "fingerprint": "customers-products-categories-count-min",
+    "hint": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name, p.category\nHAVING COUNT(DISTINCT p.category) >= 2",
+    "generatedAt": "2026-01-11T21:32:03.677Z"
+  },
+  {
+    "id": "q_1768167135825_fvmzmf",
+    "difficulty": "intermediate",
+    "question": "Find customers who have placed orders in both January and February 2024",
+    "fingerprint": "customers-orders-months-both-exists",
+    "hint": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01')\n   OR (o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01')",
+    "generatedAt": "2026-01-11T21:32:15.825Z"
+  },
+  {
+    "id": "q_1768167149128_bp07jj",
+    "difficulty": "intermediate",
+    "question": "Find the most popular product in each category based on total quantity sold",
+    "fingerprint": "products-category-quantity-max-group",
+    "hint": "SELECT p.category, p.name, SUM(oi.quantity) as total_sold\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE total_sold = (\n    SELECT MAX(SUM(oi2.quantity))\n    FROM products p2\n    JOIN order_items oi2 ON p2.id = oi2.product_id\n    WHERE p2.category = p.category\n    GROUP BY p2.id\n)\nGROUP BY p.category, p.name",
+    "generatedAt": "2026-01-11T21:32:29.128Z"
+  },
+  {
+    "id": "q_1768167161865_a62rse",
+    "difficulty": "intermediate",
+    "question": "Find products that have been ordered by customers from at least 2 different regions",
+    "fingerprint": "products-customers-regions-count-atleast",
+    "hint": "SELECT DISTINCT p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nGROUP BY p.id, p.name\nHAVING COUNT(c.region) >= 2",
+    "generatedAt": "2026-01-11T21:32:41.865Z"
+  },
+  {
+    "id": "q_1768167175287_gl30gk",
+    "difficulty": "intermediate",
+    "question": "Find products that have been ordered more than once across all orders",
+    "fingerprint": "products-orders-count-greater",
+    "hint": "SELECT p.name, COUNT(oi.product_id) as order_count\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nWHERE COUNT(oi.product_id) > 1\nGROUP BY p.id, p.name",
+    "generatedAt": "2026-01-11T21:32:55.287Z"
+  },
+  {
+    "id": "q_1768167188650_dq4xd6",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product purchased by each customer",
+    "fingerprint": "customers-products-max-price-group",
+    "hint": "SELECT c.name, p.name as product_name, p.price\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE p.price = (\n    SELECT MAX(p2.price)\n    FROM products p2\n    JOIN order_items oi2 ON p2.id = oi2.product_id\n    JOIN orders o2 ON oi2.order_id = o2.id\n)\nGROUP BY c.id, c.name, p.name, p.price",
+    "generatedAt": "2026-01-11T21:33:08.650Z"
+  },
+  {
+    "id": "q_1768167200766_1zat1i",
+    "difficulty": "intermediate",
+    "question": "Find all orders placed in February 2024 that are still pending or shipped",
+    "fingerprint": "orders-date-status-filter",
+    "hint": "SELECT o.id, o.customer_id, o.order_date, o.status, o.total_amount\nFROM orders o\nWHERE o.order_date >= '2024-02-01' \n  AND o.order_date <= '2024-02-29'\n  AND o.status IN ('pending', 'shipped')\nGROUP BY o.id, o.customer_id, o.order_date, o.status, o.total_amount",
+    "generatedAt": "2026-01-11T21:33:20.766Z"
+  },
+  {
+    "id": "q_1768167214039_rn555u",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product purchased by customers from each region",
+    "fingerprint": "products-customers-region-price-max-group",
+    "hint": "SELECT c.region, p.name, MAX(p.price) as max_price\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.region",
+    "generatedAt": "2026-01-11T21:33:34.039Z"
+  },
+  {
+    "id": "q_1768167227178_diqqth",
+    "difficulty": "intermediate",
+    "question": "Find the most expensive product purchased by each customer",
+    "fingerprint": "customers-products-orders-max-group",
+    "hint": "SELECT c.name, p.name, MAX(oi.unit_price) as max_price\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.name\nORDER BY max_price DESC",
+    "generatedAt": "2026-01-11T21:33:47.178Z"
+  },
+  {
+    "id": "q_1768167239294_5wzr1s",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered by at least one customer from every order status category",
+    "fingerprint": "products-customers-status-all-exists",
+    "hint": "SELECT DISTINCT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE p.id IN (\n    SELECT oi2.product_id\n    FROM order_items oi2\n    JOIN orders o2 ON oi2.order_id = o2.id\n    GROUP BY oi2.product_id\n    HAVING COUNT(DISTINCT o2.status) = (SELECT COUNT(DISTINCT status) FROM orders)\n)",
+    "generatedAt": "2026-01-11T21:33:59.294Z"
+  },
+  {
+    "id": "q_1768167251639_3hz9m2",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered by customers from at least three different regions",
+    "fingerprint": "products-customers-regions-count-min",
+    "hint": "SELECT DISTINCT p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nGROUP BY p.id, p.name\nHAVING COUNT(c.region) >= 3",
+    "generatedAt": "2026-01-11T21:34:11.639Z"
+  },
+  {
+    "id": "q_1768167264230_otd5cx",
+    "difficulty": "advanced",
+    "question": "Find products that appear in orders with at least two different order statuses",
+    "fingerprint": "products-orders-status-distinct-count",
+    "hint": "SELECT DISTINCT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE p.id IN (\n    SELECT oi2.product_id\n    FROM order_items oi2\n    JOIN orders o2 ON oi2.order_id = o2.id\n    GROUP BY oi2.product_id\n    HAVING COUNT(DISTINCT o2.status) >= 2\n)",
+    "generatedAt": "2026-01-11T21:34:24.230Z"
+  },
+  {
+    "id": "q_1768167278204_5lp5qo",
+    "difficulty": "advanced",
+    "question": "Find the customer who has the highest order frequency but has never ordered the most expensive product in any category",
+    "fingerprint": "customers-orders-frequency-expensive-products-never",
+    "hint": "WITH most_expensive_per_category AS (\n    SELECT category, MAX(price) as max_price\n    FROM products\n    GROUP BY category\n),\nexpensive_products AS (\n    SELECT p.id\n    FROM products p\n    JOIN most_expensive_per_category me ON p.category = me.category AND p.price = me.max_price\n),\ncustomer_order_frequency AS (\n    SELECT customer_id, COUNT(*) as order_count\n    FROM orders\n    GROUP BY customer_id\n),\ncustomers_with_expensive_products AS (\n    SELECT DISTINCT o.customer_id\n    FROM orders o\n    JOIN order_items oi ON o.id = oi.order_id\n    WHERE oi.product_id IN (SELECT id FROM expensive_products)\n)\nSELECT c.name, cof.order_count\nFROM customers c\nJOIN customer_order_frequency cof ON c.id = cof.customer_id\nWHERE c.id NOT IN (SELECT customer_id FROM customers_with_expensive_products)\nORDER BY cof.order_count DESC\nLIMIT 1;",
+    "generatedAt": "2026-01-11T21:34:38.204Z"
+  },
+  {
+    "id": "q_1768167288083_fqtojc",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in the same month as at least two other distinct products by the same customer",
+    "fingerprint": "products-orders-customers-month-count-same",
+    "hint": "SELECT DISTINCT p1.name\nFROM products p1\nJOIN order_items oi1 ON p1.id = oi1.product_id\nJOIN orders o1 ON oi1.order_id = o1.id\nWHERE EXISTS (\n    SELECT 1\n    FROM products p2\n    JOIN order_items oi2 ON p2.id = oi2.product_id\n    JOIN orders o2 ON oi2.order_id = o2.id\n    WHERE o1.customer_id = o2.customer_id\n    AND EXTRACT(YEAR FROM o1.order_date) = EXTRACT(YEAR FROM o2.order_date)\n    AND EXTRACT(MONTH FROM o1.order_date) = EXTRACT(MONTH FROM o2.order_date)\n    AND p1.id != p2.id\n    GROUP BY o2.customer_id\n    HAVING COUNT(DISTINCT p2.id) >= 2\n);",
+    "generatedAt": "2026-01-11T21:34:48.083Z"
+  },
+  {
+    "id": "q_1768167301601_20xsgy",
+    "difficulty": "advanced",
+    "question": "Find the longest gap in days between consecutive orders for each customer who has placed at least 3 orders",
+    "fingerprint": "customers-orders-consecutive-gap-max-having",
+    "hint": "WITH customer_orders AS (\n  SELECT \n    customer_id,\n    order_date,\n    LAG(order_date) OVER (PARTITION BY customer_id ORDER BY order_date) as prev_order_date\n  FROM orders\n),\norder_gaps AS (\n  SELECT \n    customer_id,\n    order_date - prev_order_date as gap_days\n  FROM customer_orders\n  WHERE prev_order_date IS NOT NULL\n),\ncustomer_order_counts AS (\n  SELECT \n    customer_id,\n    COUNT(*) as order_count\n  FROM orders\n  GROUP BY customer_id\n  HAVING COUNT(*) >= 3\n)\nSELECT \n  coc.customer_id,\n  MAX(og.gap_days) as longest_gap_days\nFROM customer_order_counts coc\nJOIN order_gaps og ON coc.customer_id = og.customer_id\nGROUP BY coc.customer_id\nORDER BY longest_gap_days DESC;",
+    "generatedAt": "2026-01-11T21:35:01.601Z"
+  },
+  {
+    "id": "q_1768167312398_8wqchw",
+    "difficulty": "advanced",
+    "question": "Find orders where the calculated total from order items differs from the stored total amount",
+    "fingerprint": "orders-items-total-calculated-differs",
+    "hint": "SELECT o.id, o.total_amount, SUM(oi.quantity * oi.unit_price) AS calculated_total\nFROM orders o\nJOIN order_items oi ON o.id = oi.order_id\nGROUP BY o.id, o.total_amount\nHAVING o.total_amount != SUM(oi.quantity * oi.unit_price)",
+    "generatedAt": "2026-01-11T21:35:12.398Z"
+  },
+  {
+    "id": "q_1768167324951_xbu77k",
+    "difficulty": "advanced",
+    "question": "Find the product category that generates the highest average order value among orders containing multiple products",
+    "fingerprint": "products-orders-category-avg-multiple-max",
+    "hint": "SELECT \n    p.category,\n    AVG(o.total_amount) as avg_order_value\nFROM orders o\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.id IN (\n    SELECT order_id \n    FROM order_items \n    GROUP BY order_id \n    HAVING COUNT(*) > 1\n)\nGROUP BY p.category\nORDER BY avg_order_value DESC\nLIMIT 1;",
+    "generatedAt": "2026-01-11T21:35:24.951Z"
+  },
+  {
+    "id": "q_1768167339568_w6it35",
+    "difficulty": "advanced",
+    "question": "Find the product that appears in the highest percentage of completed orders relative to all orders containing that product",
+    "fingerprint": "products-orders-completion-percentage-max",
+    "hint": "WITH product_order_stats AS (\n  SELECT \n    p.id,\n    p.name,\n    COUNT(DISTINCT o.id) as total_orders,\n    COUNT(DISTINCT CASE WHEN o.status = 'completed' THEN o.id END) as completed_orders\n  FROM products p\n  JOIN order_items oi ON p.id = oi.product_id\n  JOIN orders o ON oi.order_id = o.id\n  GROUP BY p.id, p.name\n),\nproduct_percentages AS (\n  SELECT \n    id,\n    name,\n    total_orders,\n    completed_orders,\n    (completed_orders * 100.0 / total_orders) as completion_percentage\n  FROM product_order_stats\n  WHERE total_orders > 0\n)\nSELECT \n  name,\n  completion_percentage\nFROM product_percentages\nORDER BY completion_percentage DESC\nLIMIT 1;",
+    "generatedAt": "2026-01-11T21:35:39.568Z"
+  },
+  {
+    "id": "q_1768167350747_vljydl",
+    "difficulty": "advanced",
+    "question": "Find the product that has the highest total revenue but appears in the fewest number of orders",
+    "fingerprint": "products-revenue-orders-max-min-count",
+    "hint": "SELECT p.name, \n       SUM(oi.quantity * oi.unit_price) as total_revenue,\n       COUNT(DISTINCT oi.order_id) as order_count\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nGROUP BY p.id, p.name\nORDER BY total_revenue DESC, order_count ASC\nLIMIT 1;",
+    "generatedAt": "2026-01-11T21:35:50.747Z"
+  },
+  {
+    "id": "q_1768167366130_g5s63m",
+    "difficulty": "advanced",
+    "question": "Find the products that appear in orders from at least 3 different regions but have never been ordered together in the same order",
+    "fingerprint": "products-orders-regions-count-not-together",
+    "hint": "WITH regional_products AS (\n  SELECT \n    p.id as product_id,\n    p.name,\n    c.region,\n    COUNT(DISTINCT o.id) as order_count\n  FROM products p\n  JOIN order_items oi ON p.id = oi.product_id\n  JOIN orders o ON oi.order_id = o.id\n  JOIN customers c ON o.customer_id = c.id\n  GROUP BY p.id, p.name, c.region\n),\nmulti_region_products AS (\n  SELECT \n    product_id,\n    name,\n    COUNT(DISTINCT region) as region_count\n  FROM regional_products\n  GROUP BY product_id, name\n  HAVING COUNT(DISTINCT region) >= 3\n),\norder_pairs AS (\n  SELECT DISTINCT \n    oi1.product_id as product1_id,\n    oi2.product_id as product2_id\n  FROM order_items oi1\n  JOIN order_items oi2 ON oi1.order_id = oi2.order_id\n  WHERE oi1.product_id < oi2.product_id\n)\nSELECT DISTINCT \n  mrp1.name as product1,\n  mrp2.name as product2\nFROM multi_region_products mrp1\nCROSS JOIN multi_region_products mrp2\nWHERE mrp1.product_id < mrp2.product_id\n  AND NOT EXISTS (\n    SELECT 1 \n    FROM order_pairs op\n    WHERE op.product1_id = mrp1.product_id \n      AND op.product2_id = mrp2.product_id\n  );",
+    "generatedAt": "2026-01-11T21:36:06.130Z"
+  },
+  {
+    "id": "q_1768167374529_yrdm95",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered exactly once but by customers who have placed multiple orders",
+    "fingerprint": "products-orders-count-once-customers-multiple",
+    "hint": "SELECT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nWHERE c.id IN (\n    SELECT customer_id \n    FROM orders \n    GROUP BY customer_id \n    HAVING COUNT(*) > 1\n)\nGROUP BY p.id, p.name\nHAVING COUNT(oi.id) = 1",
+    "generatedAt": "2026-01-11T21:36:14.529Z"
+  },
+  {
+    "id": "q_1768167387791_3n2s4d",
+    "difficulty": "advanced",
+    "question": "Find the first product purchased by each customer in their ordering history",
+    "fingerprint": "customers-products-orders-first-group",
+    "hint": "SELECT c.name, p.name as product_name, o.order_date\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.order_date = (\n    SELECT MIN(order_date)\n    FROM orders o2\n    WHERE o2.customer_id = c.id\n)\nORDER BY c.name;",
+    "generatedAt": "2026-01-11T21:36:27.791Z"
+  },
+  {
+    "id": "q_1768167400783_uac90y",
+    "difficulty": "advanced",
+    "question": "Find the customer who has the highest average order value among customers who have made orders in both January and February 2024",
+    "fingerprint": "customers-orders-avg-max-daterange-both",
+    "hint": "SELECT c.name, AVG(o.total_amount) as avg_order_value\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE (EXTRACT(MONTH FROM o.order_date) = 1 AND EXTRACT(YEAR FROM o.order_date) = 2024)\n   OR (EXTRACT(MONTH FROM o.order_date) = 2 AND EXTRACT(YEAR FROM o.order_date) = 2024)\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT EXTRACT(MONTH FROM o.order_date)) = 2\nORDER BY avg_order_value DESC\nLIMIT 1;",
+    "generatedAt": "2026-01-11T21:36:40.783Z"
+  },
+  {
+    "id": "q_1768167414020_d8i5ms",
+    "difficulty": "advanced",
+    "question": "Find the products that have been ordered together most frequently across all completed orders",
+    "fingerprint": "products-orders-cooccurrence-frequency-max",
+    "hint": "SELECT \n    p1.name AS product1,\n    p2.name AS product2,\n    COUNT(*) AS frequency\nFROM order_items oi1\nJOIN order_items oi2 ON oi1.order_id = oi2.order_id\nJOIN orders o ON oi1.order_id = o.id\nJOIN products p1 ON oi1.product_id = p1.id\nJOIN products p2 ON oi2.product_id = p2.id\nWHERE o.status = 'completed'\n    AND oi1.product_id < oi2.product_id\nGROUP BY oi1.product_id, oi2.product_id, p1.name, p2.name\nORDER BY frequency DESC;",
+    "generatedAt": "2026-01-11T21:36:54.020Z"
+  },
+  {
+    "id": "q_1768167425263_zyhvp1",
+    "difficulty": "advanced",
+    "question": "Find orders where the total amount differs from the sum of individual item costs by more than one dollar",
+    "fingerprint": "orders-items-amount-sum-difference",
+    "hint": "SELECT o.id, o.total_amount, SUM(oi.quantity * oi.unit_price) AS calculated_total,\n       ABS(o.total_amount - SUM(oi.quantity * oi.unit_price)) AS difference\nFROM orders o\nJOIN order_items oi ON o.id = oi.order_id\nGROUP BY o.id, o.total_amount\nHAVING difference > 1.0",
+    "generatedAt": "2026-01-11T21:37:05.263Z"
+  },
+  {
+    "id": "q_1768167439655_7qpsiw",
+    "difficulty": "advanced",
+    "question": "Find the product that appears most frequently in orders containing exactly two different categories",
+    "fingerprint": "products-orders-categories-count-frequent-max",
+    "hint": "WITH order_categories AS (\n  SELECT o.id as order_id, COUNT(DISTINCT p.category) as category_count\n  FROM orders o\n  JOIN order_items oi ON o.id = oi.order_id\n  JOIN products p ON oi.product_id = p.id\n  GROUP BY o.id\n  HAVING COUNT(DISTINCT p.category) = 2\n),\nproduct_frequency AS (\n  SELECT p.id, p.name, COUNT(*) as frequency\n  FROM order_categories oc\n  JOIN order_items oi ON oc.order_id = oi.order_id\n  JOIN products p ON oi.product_id = p.id\n  GROUP BY p.id, p.name\n)\nSELECT name, frequency\nFROM product_frequency\nORDER BY frequency DESC\nLIMIT 1;",
+    "generatedAt": "2026-01-11T21:37:19.655Z"
+  },
+  {
+    "id": "q_1768167453750_a42r3c",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in both January and February but never in the same order with any Electronics product",
+    "fingerprint": "products-orders-months-electronics-exclude-intersect",
+    "hint": "WITH jan_products AS (\n  SELECT DISTINCT oi.product_id\n  FROM order_items oi\n  JOIN orders o ON oi.order_id = o.id\n  WHERE o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01'\n),\nfeb_products AS (\n  SELECT DISTINCT oi.product_id\n  FROM order_items oi\n  JOIN orders o ON oi.order_id = o.id\n  WHERE o.order_date >= '2024-02-01' AND o.order_date < '2024-03-01'\n),\nboth_months AS (\n  SELECT jp.product_id\n  FROM jan_products jp\n  JOIN feb_products fp ON jp.product_id = fp.product_id\n),\nelectronics_orders AS (\n  SELECT DISTINCT oi.order_id\n  FROM order_items oi\n  JOIN products p ON oi.product_id = p.id\n  WHERE p.category = 'Electronics'\n),\nnon_electronics_orders AS (\n  SELECT DISTINCT oi.order_id, oi.product_id\n  FROM order_items oi\n  WHERE oi.order_id NOT IN (SELECT order_id FROM electronics_orders)\n)\nSELECT DISTINCT p.id, p.name, p.category\nFROM both_months bm\nJOIN products p ON bm.product_id = p.id\nWHERE bm.product_id IN (SELECT product_id FROM non_electronics_orders);",
+    "generatedAt": "2026-01-11T21:37:33.750Z"
+  },
+  {
+    "id": "q_1768167462197_9elr6p",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered by customers from at least three different regions",
+    "fingerprint": "products-customers-regions-count-threshold",
+    "hint": "SELECT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT c.region) >= 3",
+    "generatedAt": "2026-01-11T21:37:42.197Z"
+  },
+  {
+    "id": "q_1768167479201_aix24y",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in both January and February but never in the same order together",
+    "fingerprint": "products-orders-months-both-not-same",
+    "hint": "SELECT DISTINCT p1.id, p1.name\nFROM products p1\nJOIN order_items oi1 ON p1.id = oi1.product_id\nJOIN orders o1 ON oi1.order_id = o1.id\nWHERE EXISTS (\n    SELECT 1 FROM order_items oi_jan\n    JOIN orders o_jan ON oi_jan.order_id = o_jan.id\n    WHERE oi_jan.product_id = p1.id\n    AND o_jan.order_date >= '2024-01-01' \n    AND o_jan.order_date < '2024-02-01'\n)\nAND EXISTS (\n    SELECT 1 FROM order_items oi_feb\n    JOIN orders o_feb ON oi_feb.order_id = o_feb.id\n    WHERE oi_feb.product_id = p1.id\n    AND o_feb.order_date >= '2024-02-01' \n    AND o_feb.order_date < '2024-03-01'\n)\nAND NOT EXISTS (\n    SELECT 1 FROM orders o_same\n    JOIN order_items oi_same1 ON o_same.id = oi_same1.order_id\n    JOIN order_items oi_same2 ON o_same.id = oi_same2.order_id\n    WHERE oi_same1.product_id = p1.id\n    AND oi_same2.product_id != p1.id\n    AND EXISTS (\n        SELECT 1 FROM order_items oi_other\n        JOIN orders o_other ON oi_other.order_id = o_other.id\n        WHERE oi_other.product_id = oi_same2.product_id\n        AND ((o_other.order_date >= '2024-01-01' AND o_other.order_date < '2024-02-01')\n             OR (o_other.order_date >= '2024-02-01' AND o_other.order_date < '2024-03-01'))\n    )\n);",
+    "generatedAt": "2026-01-11T21:37:59.201Z"
+  },
+  {
+    "id": "q_1768167488498_w080f4",
+    "difficulty": "advanced",
+    "question": "Find the customer who has the most diverse shopping pattern by counting distinct categories purchased across all their orders",
+    "fingerprint": "customers-orders-categories-distinct-count-max",
+    "hint": "SELECT c.name, COUNT(p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nGROUP BY c.id, c.name\nORDER BY category_count DESC\nLIMIT 1;",
+    "generatedAt": "2026-01-11T21:38:08.498Z"
+  },
+  {
+    "id": "q_1768167501748_yndyez",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from at least three different categories across all their orders",
+    "fingerprint": "customers-products-categories-count-threshold",
+    "hint": "SELECT c.id, c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) >= 3",
+    "generatedAt": "2026-01-11T21:38:21.748Z"
+  },
+  {
+    "id": "q_1768167514746_tu62hs",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in every region where orders exist",
+    "fingerprint": "products-orders-regions-all-exists",
+    "hint": "SELECT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nJOIN customers c ON o.customer_id = c.id\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT c.region) = (\n    SELECT COUNT(DISTINCT region) \n    FROM customers\n)",
+    "generatedAt": "2026-01-11T21:38:34.746Z"
+  },
+  {
+    "id": "q_1768167526382_1caqfl",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in every order status except 'pending'",
+    "fingerprint": "products-orders-status-except-all",
+    "hint": "SELECT DISTINCT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status IN ('completed', 'shipped')\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT o.status) = 2",
+    "generatedAt": "2026-01-11T21:38:46.382Z"
+  },
+  {
+    "id": "q_1768167542924_mdtxk4",
+    "difficulty": "advanced",
+    "question": "Find customers whose order patterns changed significantly between January and February based on the categories they purchased",
+    "fingerprint": "customers-orders-categories-monthly-comparison",
+    "hint": "WITH monthly_categories AS (\n  SELECT \n    c.id as customer_id,\n    c.name,\n    EXTRACT(MONTH FROM o.order_date) as month,\n    p.category,\n    COUNT(*) as category_purchases\n  FROM customers c\n  JOIN orders o ON c.id = o.customer_id\n  JOIN order_items oi ON o.id = oi.order_id\n  JOIN products p ON oi.product_id = p.id\n  WHERE o.order_date >= '2024-01-01' AND o.order_date <= '2024-02-29'\n  GROUP BY c.id, c.name, EXTRACT(MONTH FROM o.order_date), p.category\n),\ncustomer_category_comparison AS (\n  SELECT \n    customer_id,\n    name,\n    category,\n    SUM(CASE WHEN month = 1 THEN category_purchases ELSE 0 END) as jan_purchases,\n    SUM(CASE WHEN month = 2 THEN category_purchases ELSE 0 END) as feb_purchases\n  FROM monthly_categories\n  GROUP BY customer_id, name, category\n)\nSELECT \n  customer_id,\n  name,\n  category,\n  jan_purchases,\n  feb_purchases,\n  ABS(jan_purchases - feb_purchases) as change_magnitude\nFROM customer_category_comparison\nWHERE jan_purchases > 0 OR feb_purchases > 0\nORDER BY change_magnitude DESC;",
+    "generatedAt": "2026-01-11T21:39:02.924Z"
+  },
+  {
+    "id": "q_1768167552417_5urp8j",
+    "difficulty": "advanced",
+    "question": "Find the product pairs that were ordered together most frequently across all completed orders",
+    "fingerprint": "products-orders-pairs-frequency-max",
+    "hint": "SELECT \n    p1.name AS product1,\n    p2.name AS product2,\n    COUNT(*) AS frequency\nFROM order_items oi1\nJOIN order_items oi2 ON oi1.order_id = oi2.order_id \n    AND oi1.product_id < oi2.product_id\nJOIN products p1 ON oi1.product_id = p1.id\nJOIN products p2 ON oi2.product_id = p2.id\nJOIN orders o ON oi1.order_id = o.id\nGROUP BY oi1.product_id, oi2.product_id, p1.name, p2.name\nORDER BY frequency DESC;",
+    "generatedAt": "2026-01-11T21:39:12.417Z"
+  },
+  {
+    "id": "q_1768167565328_69r9bd",
+    "difficulty": "advanced",
+    "question": "Find all customers who have ordered products from at least 3 different categories in their order history",
+    "fingerprint": "customers-products-categories-count-threshold",
+    "hint": "SELECT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) >= 3;",
+    "generatedAt": "2026-01-11T21:39:25.328Z"
+  },
+  {
+    "id": "q_1768167580183_c6x08q",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in every month where at least one order was placed",
+    "fingerprint": "products-orders-months-all-exists",
+    "hint": "WITH monthly_orders AS (\n    SELECT DISTINCT \n        DATE_FORMAT(o.order_date, '%Y-%m') as order_month,\n        oi.product_id\n    FROM orders o\n    JOIN order_items oi ON o.id = oi.order_id\n),\nall_months AS (\n    SELECT DISTINCT DATE_FORMAT(order_date, '%Y-%m') as order_month\n    FROM orders\n),\nproduct_month_counts AS (\n    SELECT \n        product_id,\n        COUNT(DISTINCT order_month) as months_ordered\n    FROM monthly_orders\n    GROUP BY product_id\n)\nSELECT \n    p.id,\n    p.name,\n    pmc.months_ordered\nFROM products p\nJOIN product_month_counts pmc ON p.id = pmc.product_id\nWHERE pmc.months_ordered = (SELECT COUNT(*) FROM all_months)",
+    "generatedAt": "2026-01-11T21:39:40.183Z"
+  },
+  {
+    "id": "q_1768167593583_8o370l",
+    "difficulty": "advanced",
+    "question": "Find products that appear in orders from at least 3 different regions but have never been ordered together with a Laptop Pro in the same order",
+    "fingerprint": "products-orders-regions-count-exclude-combination",
+    "hint": "WITH regional_products AS (\n    SELECT \n        p.id,\n        p.name,\n        COUNT(DISTINCT c.region) as region_count\n    FROM products p\n    JOIN order_items oi ON p.id = oi.product_id\n    JOIN orders o ON oi.order_id = o.id\n    JOIN customers c ON o.customer_id = c.id\n    GROUP BY p.id, p.name\n    HAVING COUNT(DISTINCT c.region) >= 3\n),\nlaptop_orders AS (\n    SELECT DISTINCT oi.order_id\n    FROM order_items oi\n    JOIN products p ON oi.product_id = p.id\n    WHERE p.name = 'Laptop Pro'\n)\nSELECT rp.name\nFROM regional_products rp\nWHERE rp.id NOT IN (\n    SELECT DISTINCT oi.product_id\n    FROM order_items oi\n    WHERE oi.order_id IN (SELECT order_id FROM laptop_orders)\n        AND oi.product_id != (SELECT id FROM products WHERE name = 'Laptop Pro')\n);",
+    "generatedAt": "2026-01-11T21:39:53.583Z"
+  },
+  {
+    "id": "q_1768167604487_33jxm3",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from the most categories among all customers",
+    "fingerprint": "customers-products-categories-max-count",
+    "hint": "WITH customer_categories AS (\n  SELECT \n    c.id,\n    c.name,\n    COUNT(DISTINCT p.category) as category_count\n  FROM customers c\n  JOIN orders o ON c.id = o.customer_id\n  JOIN order_items oi ON o.id = oi.order_id\n  JOIN products p ON oi.product_id = p.id\n  WHERE o.status = 'completed'\n  GROUP BY c.id, c.name\n),\nmax_categories AS (\n  SELECT MAX(category_count) as max_count\n  FROM customer_categories\n)\nSELECT \n  cc.name,\n  cc.category_count\nFROM customer_categories cc, max_categories mc\nWHERE cc.category_count = mc.max_count\nORDER BY cc.name;",
+    "generatedAt": "2026-01-11T21:40:04.487Z"
+  },
+  {
+    "id": "q_1768167620354_qa5vqw",
+    "difficulty": "advanced",
+    "question": "Find products that appear in orders from all three regions but never appear together in the same order",
+    "fingerprint": "products-orders-regions-all-not-together",
+    "hint": "WITH regional_products AS (\n  SELECT DISTINCT p.id, p.name, c.region\n  FROM products p\n  JOIN order_items oi ON p.id = oi.product_id\n  JOIN orders o ON oi.order_id = o.id\n  JOIN customers c ON o.customer_id = c.id\n),\nproducts_in_all_regions AS (\n  SELECT id, name\n  FROM regional_products\n  GROUP BY id, name\n  HAVING COUNT(DISTINCT region) = 3\n),\nproduct_pairs_in_same_order AS (\n  SELECT DISTINCT oi1.product_id as product1, oi2.product_id as product2\n  FROM order_items oi1\n  JOIN order_items oi2 ON oi1.order_id = oi2.order_id AND oi1.product_id < oi2.product_id\n)\nSELECT p1.name as product1, p2.name as product2\nFROM products_in_all_regions p1\nCROSS JOIN products_in_all_regions p2\nWHERE p1.id < p2.id\nAND NOT EXISTS (\n  SELECT 1 FROM product_pairs_in_same_order pp\n  WHERE (pp.product1 = p1.id AND pp.product2 = p2.id)\n)",
+    "generatedAt": "2026-01-11T21:40:20.354Z"
+  },
+  {
+    "id": "q_1768167629673_szz3oo",
+    "difficulty": "advanced",
+    "question": "Find customers who have placed orders in both January and February but never ordered the same product twice across all their orders",
+    "fingerprint": "customers-orders-months-products-distinct-complex",
+    "hint": "SELECT DISTINCT c.id, c.name\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nWHERE (EXTRACT(MONTH FROM o.order_date) = 1 OR EXTRACT(MONTH FROM o.order_date) = 2)\n  AND EXTRACT(YEAR FROM o.order_date) = 2024\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT CASE WHEN EXTRACT(MONTH FROM o.order_date) = 1 THEN o.id END) > 0\n   AND COUNT(DISTINCT CASE WHEN EXTRACT(MONTH FROM o.order_date) = 2 THEN o.id END) > 0\n   AND COUNT(oi.product_id) = COUNT(DISTINCT oi.product_id)",
+    "generatedAt": "2026-01-11T21:40:29.673Z"
+  },
+  {
+    "id": "q_1768167644876_lngxyj",
+    "difficulty": "advanced",
+    "question": "Find products that appear in more orders than the average product popularity but generate less revenue than the median product revenue",
+    "fingerprint": "products-orders-popularity-revenue-above-below-avg-median",
+    "hint": "WITH product_stats AS (\n  SELECT \n    p.id,\n    p.name,\n    COUNT(DISTINCT oi.order_id) as order_count,\n    SUM(oi.quantity * oi.unit_price) as total_revenue\n  FROM products p\n  JOIN order_items oi ON p.id = oi.product_id\n  GROUP BY p.id, p.name\n),\navg_popularity AS (\n  SELECT AVG(order_count) as avg_orders\n  FROM product_stats\n),\nmedian_revenue AS (\n  SELECT total_revenue as median_rev\n  FROM product_stats\n  ORDER BY total_revenue\n  LIMIT 1 OFFSET (SELECT COUNT(*) / 2 FROM product_stats)\n)\nSELECT ps.name, ps.order_count, ps.total_revenue\nFROM product_stats ps, avg_popularity ap, median_revenue mr\nWHERE ps.order_count > ap.avg_orders\n  AND ps.total_revenue < mr.median_rev;",
+    "generatedAt": "2026-01-11T21:40:44.876Z"
+  },
+  {
+    "id": "q_1768167656178_rf3t73",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered together with every other product in the Electronics category",
+    "fingerprint": "products-electronics-all-together-orders",
+    "hint": "SELECT DISTINCT p1.name\nFROM products p1\nJOIN order_items oi1 ON p1.id = oi1.product_id\nJOIN order_items oi2 ON oi1.order_id = oi2.order_id\nJOIN products p2 ON oi2.product_id = p2.id\nWHERE p2.category = 'Electronics'\nGROUP BY p1.id, p1.name\nHAVING COUNT(DISTINCT p2.id) = (\n    SELECT COUNT(*) - 1\n    FROM products \n    WHERE category = 'Electronics'\n)",
+    "generatedAt": "2026-01-11T21:40:56.178Z"
+  },
+  {
+    "id": "q_1768167671059_x9b32y",
+    "difficulty": "advanced",
+    "question": "Find the month where each customer had their highest order value and show how many months later this was compared to their first order",
+    "fingerprint": "customers-orders-month-max-first-difference",
+    "hint": "WITH customer_orders AS (\n    SELECT \n        c.id,\n        c.name,\n        DATE_TRUNC('month', o.order_date) as order_month,\n        MAX(o.total_amount) as max_order_value,\n        MIN(o.order_date) as first_order_date\n    FROM customers c\n    JOIN orders o ON c.id = o.customer_id\n    WHERE o.status = 'completed'\n    GROUP BY c.id, c.name, DATE_TRUNC('month', o.order_date)\n),\ncustomer_max_months AS (\n    SELECT \n        id,\n        name,\n        order_month,\n        max_order_value,\n        first_order_date,\n        ROW_NUMBER() OVER (PARTITION BY id ORDER BY max_order_value DESC) as rn\n    FROM customer_orders\n)\nSELECT \n    name,\n    order_month as highest_value_month,\n    max_order_value,\n    EXTRACT(MONTH FROM AGE(order_month, first_order_date)) as months_difference\nFROM customer_max_months\nWHERE rn = 1\nORDER BY name;",
+    "generatedAt": "2026-01-11T21:41:11.059Z"
+  },
+  {
+    "id": "q_1768167682399_kw2buz",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in at least 3 different orders but never as part of a multi-item order",
+    "fingerprint": "products-orders-count-single-item",
+    "hint": "SELECT p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE oi.quantity = 1\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT o.id) >= 3\nAND NOT EXISTS (\n    SELECT 1 \n    FROM order_items oi2 \n    JOIN orders o2 ON oi2.order_id = o2.id\n    WHERE oi2.product_id = p.id \n    AND o2.id IN (\n        SELECT order_id \n        FROM order_items \n        GROUP BY order_id \n        HAVING COUNT(*) > 1\n    )\n);",
+    "generatedAt": "2026-01-11T21:41:22.399Z"
+  },
+  {
+    "id": "q_1768167696857_7km158",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in every month where orders were placed",
+    "fingerprint": "products-orders-months-all-temporal",
+    "hint": "WITH monthly_orders AS (\n    SELECT DISTINCT \n        DATE_FORMAT(order_date, '%Y-%m') as order_month,\n        oi.product_id\n    FROM orders o\n    JOIN order_items oi ON o.id = oi.order_id\n),\ntotal_months AS (\n    SELECT COUNT(DISTINCT DATE_FORMAT(order_date, '%Y-%m')) as month_count\n    FROM orders\n)\nSELECT p.id, p.name\nFROM products p\nJOIN monthly_orders mo ON p.id = mo.product_id\nCROSS JOIN total_months tm\nGROUP BY p.id, p.name, tm.month_count\nHAVING COUNT(DISTINCT mo.order_month) = tm.month_count",
+    "generatedAt": "2026-01-11T21:41:36.857Z"
+  },
+  {
+    "id": "q_1768167708818_yp3dpd",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered with every other product in the Electronics category",
+    "fingerprint": "products-electronics-all-combinations",
+    "hint": "SELECT DISTINCT p1.name\nFROM products p1\nJOIN order_items oi1 ON p1.id = oi1.product_id\nJOIN products p2 ON p2.category = 'Electronics'\nWHERE p1.category = 'Electronics'\n  AND p1.id != p2.id\n  AND EXISTS (\n    SELECT 1 \n    FROM order_items oi2\n    JOIN orders o ON oi2.order_id = o.id\n    WHERE oi2.product_id = p2.id\n      AND o.id IN (\n        SELECT DISTINCT o2.id\n        FROM orders o2\n        JOIN order_items oi3 ON o2.id = oi3.order_id\n        WHERE oi3.product_id = p1.id\n      )\n  )",
+    "generatedAt": "2026-01-11T21:41:48.818Z"
+  },
+  {
+    "id": "q_1768167721026_8in612",
+    "difficulty": "advanced",
+    "question": "Find the product categories where every product in that category has been ordered at least once",
+    "fingerprint": "products-categories-orders-all-exists",
+    "hint": "SELECT DISTINCT p.category\nFROM products p\nWHERE p.id IN (\n    SELECT DISTINCT oi.product_id\n    FROM order_items oi\n)\nAND p.category NOT IN (\n    SELECT p2.category\n    FROM products p2\n    LEFT JOIN order_items oi2 ON p2.id = oi2.product_id\n    WHERE oi2.product_id IS NULL\n);",
+    "generatedAt": "2026-01-11T21:42:01.026Z"
+  },
+  {
+    "id": "q_1768167738365_4ilyh2",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered by customers from all regions but never in the same order together",
+    "fingerprint": "products-customers-regions-all-exclusive",
+    "hint": "SELECT DISTINCT p1.name as product1, p2.name as product2\nFROM products p1\nJOIN order_items oi1 ON p1.id = oi1.product_id\nJOIN orders o1 ON oi1.order_id = o1.id\nJOIN customers c1 ON o1.customer_id = c1.id\nJOIN products p2 ON p2.id != p1.id\nJOIN order_items oi2 ON p2.id = oi2.product_id\nJOIN orders o2 ON oi2.order_id = o2.id\nJOIN customers c2 ON o2.customer_id = c2.id\nWHERE NOT EXISTS (\n    SELECT 1 \n    FROM order_items oi3, order_items oi4 \n    WHERE oi3.order_id = oi4.order_id \n    AND oi3.product_id = p1.id \n    AND oi4.product_id = p2.id\n)\nAND EXISTS (\n    SELECT 1 FROM customers c WHERE c.region = 'West' \n    AND EXISTS (SELECT 1 FROM orders o, order_items oi WHERE o.id = oi.order_id AND oi.product_id = p1.id AND o.customer_id = c.id)\n)\nAND EXISTS (\n    SELECT 1 FROM customers c WHERE c.region = 'East'\n    AND EXISTS (SELECT 1 FROM orders o, order_items oi WHERE o.id = oi.order_id AND oi.product_id = p1.id AND o.customer_id = c.id)\n)\nAND EXISTS (\n    SELECT 1 FROM customers c WHERE c.region = 'Central'\n    AND EXISTS (SELECT 1 FROM orders o, order_items oi WHERE o.id = oi.order_id AND oi.product_id = p1.id AND o.customer_id = c.id)\n);",
+    "generatedAt": "2026-01-11T21:42:18.365Z"
+  },
+  {
+    "id": "q_1768167747646_0ys7v5",
+    "difficulty": "advanced",
+    "question": "Find the customer who has the highest average order value among those who have placed orders in both January and February 2024",
+    "fingerprint": "customers-orders-avg-monthly-both-max",
+    "hint": "SELECT c.name, AVG(o.total_amount) as avg_order_value\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nWHERE o.order_date >= '2024-01-01' AND o.order_date <= '2024-02-29'\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT CASE WHEN o.order_date >= '2024-01-01' AND o.order_date < '2024-02-01' THEN 1 END) > 0\n   AND COUNT(DISTINCT CASE WHEN o.order_date >= '2024-02-01' AND o.order_date <= '2024-02-29' THEN 1 END) > 0\nORDER BY avg_order_value DESC\nLIMIT 1",
+    "generatedAt": "2026-01-11T21:42:27.646Z"
+  },
+  {
+    "id": "q_1768167761449_k1f8uu",
+    "difficulty": "advanced",
+    "question": "Find products that are ordered together most frequently across all completed orders",
+    "fingerprint": "products-orders-frequency-group-completed",
+    "hint": "WITH product_pairs AS (\n  SELECT \n    oi1.product_id as product_a,\n    oi2.product_id as product_b,\n    COUNT(*) as frequency\n  FROM order_items oi1\n  JOIN order_items oi2 ON oi1.order_id = oi2.order_id\n  JOIN orders o ON oi1.order_id = o.id\n  WHERE o.status = 'completed' \n    AND oi1.product_id < oi2.product_id\n  GROUP BY oi1.product_id, oi2.product_id\n)\nSELECT \n  p1.name as product_a_name,\n  p2.name as product_b_name,\n  pp.frequency\nFROM product_pairs pp\nJOIN products p1 ON pp.product_a = p1.id\nJOIN products p2 ON pp.product_b = p2.id\nORDER BY pp.frequency DESC;",
+    "generatedAt": "2026-01-11T21:42:41.449Z"
+  },
+  {
+    "id": "q_1768167773638_4fcrng",
+    "difficulty": "advanced",
+    "question": "Find orders where the calculated item total differs from the stored order total",
+    "fingerprint": "orders-items-total-calculated-mismatch",
+    "hint": "WITH order_calculations AS (\n  SELECT \n    o.id,\n    o.total_amount as stored_total,\n    SUM(oi.quantity * oi.unit_price) as calculated_total\n  FROM orders o\n  JOIN order_items oi ON o.id = oi.order_id\n  GROUP BY o.id, o.total_amount\n)\nSELECT \n  id,\n  stored_total,\n  calculated_total,\n  ABS(stored_total - calculated_total) as difference\nFROM order_calculations\nWHERE stored_total != calculated_total;",
+    "generatedAt": "2026-01-11T21:42:53.638Z"
+  },
+  {
+    "id": "q_1768167786557_4uoh2o",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered in every order status except pending",
+    "fingerprint": "products-orders-status-except-all",
+    "hint": "SELECT p.id, p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status IN ('completed', 'shipped')\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT o.status) = 2",
+    "generatedAt": "2026-01-11T21:43:06.557Z"
+  },
+  {
+    "id": "q_1768167800780_32a7u3",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered with at least 3 different products across all orders",
+    "fingerprint": "products-orders-count-threshold-group",
+    "hint": "SELECT DISTINCT p.id, p.name\nFROM products p\nJOIN order_items oi1 ON p.id = oi1.product_id\nJOIN order_items oi2 ON oi1.order_id = oi2.order_id AND oi1.product_id != oi2.product_id\nJOIN order_items oi3 ON oi1.order_id = oi3.order_id AND oi1.product_id != oi3.product_id AND oi2.product_id != oi3.product_id\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT oi1.order_id) >= 3;",
+    "generatedAt": "2026-01-11T21:43:20.780Z"
+  },
+  {
+    "id": "q_1768167815066_8oit8c",
+    "difficulty": "advanced",
+    "question": "Find products that have generated revenue in both January and February but were never the only item in any completed order",
+    "fingerprint": "products-revenue-months-both-orders-not-single",
+    "hint": "WITH monthly_revenue AS (\n    SELECT \n        p.id,\n        p.name,\n        EXTRACT(MONTH FROM o.order_date) as month\n    FROM products p\n    JOIN order_items oi ON p.id = oi.product_id\n    JOIN orders o ON oi.order_id = o.id\n    WHERE o.status = 'completed'\n),\nboth_months AS (\n    SELECT id, name\n    FROM monthly_revenue\n    WHERE month IN (1, 2)\n    GROUP BY id, name\n    HAVING COUNT(DISTINCT month) = 2\n),\nsingle_item_orders AS (\n    SELECT DISTINCT oi.product_id\n    FROM order_items oi\n    JOIN orders o ON oi.order_id = o.id\n    WHERE o.status = 'completed'\n    GROUP BY oi.order_id\n    HAVING COUNT(*) = 1\n)\nSELECT bm.name\nFROM both_months bm\nWHERE bm.id NOT IN (SELECT product_id FROM single_item_orders WHERE product_id IS NOT NULL)",
+    "generatedAt": "2026-01-11T21:43:35.066Z"
+  },
+  {
+    "id": "q_1768167827431_k4gbon",
+    "difficulty": "advanced",
+    "question": "Find products that appear in more completed orders than the average product completion frequency",
+    "fingerprint": "products-orders-completed-avg-compare",
+    "hint": "SELECT p.name, COUNT(DISTINCT o.id) as order_count\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN orders o ON oi.order_id = o.id\nWHERE o.status = 'completed'\nGROUP BY p.id, p.name\nHAVING COUNT(DISTINCT o.id) > (\n    SELECT AVG(product_order_count)\n    FROM (\n        SELECT COUNT(DISTINCT o2.id) as product_order_count\n        FROM products p2\n        JOIN order_items oi2 ON p2.id = oi2.product_id\n        JOIN orders o2 ON oi2.order_id = o2.id\n        GROUP BY p2.id\n    ) avg_calc\n)",
+    "generatedAt": "2026-01-11T21:43:47.431Z"
+  },
+  {
+    "id": "q_1768167840573_22x1uu",
+    "difficulty": "advanced",
+    "question": "Find customers who have ordered products from exactly two different categories across all their completed orders",
+    "fingerprint": "customers-orders-categories-exactly-count",
+    "hint": "SELECT c.name, COUNT(DISTINCT p.category) as category_count\nFROM customers c\nJOIN orders o ON c.id = o.customer_id\nJOIN order_items oi ON o.id = oi.order_id\nJOIN products p ON oi.product_id = p.id\nWHERE o.status = 'completed'\nGROUP BY c.id, c.name\nHAVING COUNT(DISTINCT p.category) = 2",
+    "generatedAt": "2026-01-11T21:44:00.573Z"
+  },
+  {
+    "id": "q_1768167854685_895w4a",
+    "difficulty": "advanced",
+    "question": "Find products that have been ordered together with Laptop Pro but never ordered by the same customers who bought Running Shoes",
+    "fingerprint": "products-orders-customers-together-exclude",
+    "hint": "SELECT DISTINCT p.name\nFROM products p\nJOIN order_items oi ON p.id = oi.product_id\nJOIN order_items oi2 ON oi.order_id = oi2.order_id\nJOIN products p2 ON oi2.product_id = p2.id\nWHERE p2.name = 'Laptop Pro'\n  AND p.name != 'Laptop Pro'\n  AND p.id NOT IN (\n    SELECT DISTINCT oi3.product_id\n    FROM order_items oi3\n    JOIN orders o ON oi3.order_id = o.id\n    WHERE o.customer_id IN (\n      SELECT DISTINCT o2.customer_id\n      FROM orders o2\n      JOIN order_items oi4 ON o2.id = oi4.order_id\n      JOIN products p3 ON oi4.product_id = p3.id\n      WHERE p3.name = 'Running Shoes'\n    )\n  )",
+    "generatedAt": "2026-01-11T21:44:14.685Z"
+  },
+  {
+    "id": "q_1768167871092_qvpkdj",
+    "difficulty": "advanced",
+    "question": "Find customers who have placed orders in consecutive months and ordered products from at least three different categories across those orders",
+    "fingerprint": "customers-orders-consecutive-months-categories-min",
+    "hint": "WITH monthly_orders AS (\n  SELECT \n    c.id as customer_id,\n    c.name,\n    DATE_TRUNC('month', o.order_date) as order_month,\n    COUNT(DISTINCT p.category) as categories_count\n  FROM customers c\n  JOIN orders o ON c.id = o.customer_id\n  JOIN order_items oi ON o.id = oi.order_id\n  JOIN products p ON oi.product_id = p.id\n  GROUP BY c.id, c.name, DATE_TRUNC('month', o.order_date)\n),\nconsecutive_months AS (\n  SELECT \n    customer_id,\n    name,\n    order_month,\n    categories_count,\n    LAG(order_month) OVER (PARTITION BY customer_id ORDER BY order_month) as prev_month\n  FROM monthly_orders\n)\nSELECT DISTINCT \n  customer_id,\n  name\nFROM consecutive_months\nWHERE order_month = prev_month + INTERVAL '1 month'\n  AND categories_count >= 3;",
+    "generatedAt": "2026-01-11T21:44:31.092Z"
   }
 ]
