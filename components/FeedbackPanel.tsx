@@ -92,7 +92,15 @@ export default function FeedbackPanel({ response, error, loading }: FeedbackPane
           Coach Feedback
         </h3>
         <div className="prose prose-sm dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
-          <ReactMarkdown>{response.feedback}</ReactMarkdown>
+          <ReactMarkdown
+            skipHtml={true}
+            allowedElements={[
+              "p", "strong", "em", "code", "pre", "blockquote",
+              "ul", "ol", "li", "h1", "h2", "h3", "h4", "a", "br"
+            ]}
+          >
+            {response.feedback}
+          </ReactMarkdown>
         </div>
       </div>
     </div>

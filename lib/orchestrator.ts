@@ -4,6 +4,16 @@ import { generateCompletion } from "./anthropic";
 import { executeSQL } from "./sql-executor";
 import { CoachRequest, CoachResponse, HintRequest, HintResponse } from "./types";
 
+/**
+ * Sanitizes user input before embedding in LLM prompts to prevent prompt injection.
+ * Escapes XML-like tags that could break prompt structure or inject instructions.
+ */
+function sanitizeForPrompt(input: string): string {
+  return input
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function loadAgentFile(filename: string): string {
   const filePath = path.join(process.cwd(), "agents", "querycoach", filename);
   return readFileSync(filePath, "utf-8");
@@ -55,6 +65,10 @@ function buildUserMessage(
     ? queryResult.data
     : `ERROR: ${queryResult.error}`;
 
+  // Sanitize user-controlled input to prevent prompt injection
+  const sanitizedQuery = sanitizeForPrompt(request.userQuery);
+  const sanitizedResult = sanitizeForPrompt(resultText ?? "");
+
   let message = `
 <schema>
 ${request.schema}
@@ -63,11 +77,11 @@ ${request.schema}
 <question>${request.question}</question>
 
 <user_query>
-${request.userQuery}
+${sanitizedQuery}
 </user_query>
 
 <query_result>
-${resultText}
+${sanitizedResult}
 </query_result>
 
 <user_level>${request.userLevel}</user_level>
