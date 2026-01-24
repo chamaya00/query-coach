@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
         question: selected.question,
         questionId: selected.id,
         difficulty: selected.difficulty,
+        skillIds: selected.skillIds || [],
         fromCache: true,
       });
     }

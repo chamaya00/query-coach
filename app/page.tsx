@@ -4,7 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import SQLEditor from "@/components/SQLEditor";
 import TableBrowser from "@/components/TableBrowser";
 import FeedbackPanel from "@/components/FeedbackPanel";
+import SkillTree, { SkillProgressBar } from "@/components/SkillTree";
 import { UserLevel, CoachResponse } from "@/lib/types";
+import { useSkillProgress, BADGES } from "@/lib/skills";
 
 const DEFAULT_SCHEMA = `-- E-commerce sample database
 CREATE TABLE customers (
@@ -148,6 +150,18 @@ export default function Home() {
   const [showHint, setShowHint] = useState(false);
   const [hintLoading, setHintLoading] = useState(false);
   const [questionId, setQuestionId] = useState<string | null>(null);
+  const [currentSkillIds, setCurrentSkillIds] = useState<string[]>([]);
+  const [showSkillTree, setShowSkillTree] = useState(true);
+
+  // Skill progress tracking
+  const {
+    progress,
+    proficiency,
+    badges,
+    sessionStats,
+    recordAnswer,
+    isLoaded,
+  } = useSkillProgress();
 
   const fetchHint = useCallback(async () => {
     if (!showHint || !question.trim()) {
@@ -215,6 +229,19 @@ export default function Home() {
       }
 
       setResponse(data);
+
+      // Record the answer for skill progress tracking
+      // Determine if answer was correct based on feedback content
+      const feedbackLower = data.feedback?.toLowerCase() || "";
+      const wasCorrect =
+        feedbackLower.includes("correct") &&
+        !feedbackLower.includes("incorrect") &&
+        !feedbackLower.includes("not correct") &&
+        !feedbackLower.includes("not quite");
+
+      if (currentSkillIds.length > 0) {
+        recordAnswer(currentSkillIds, wasCorrect, showHint);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -226,6 +253,8 @@ export default function Home() {
     setGeneratingQuestion(true);
     setError(null);
     setQuestionDifficulty(difficulty);
+    setShowHint(false);
+    setUserQuery("");
 
     try {
       const res = await fetch("/api/generate-question", {
@@ -245,6 +274,7 @@ export default function Home() {
 
       setQuestion(data.question);
       setQuestionId(data.questionId || null);
+      setCurrentSkillIds(data.skillIds || []);
       setResponse(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to generate question");
@@ -258,20 +288,92 @@ export default function Home() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <header className={`mb-8 ${theme.header} -mx-4 px-4 py-6`}>
-          <div>
-            <h1 className={`text-3xl font-bold ${theme.headerText}`}>
-              Level Up{" "}
-              <span className={theme.headerAccent}>SQL</span>
-            </h1>
-            <p className={`mt-2 ${theme.mutedText}`}>
-              Get expert feedback on your queries from our AI SQL coaching agent
-            </p>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h1 className={`text-3xl font-bold ${theme.headerText}`}>
+                Level Up{" "}
+                <span className={theme.headerAccent}>SQL</span>
+              </h1>
+              <p className={`mt-2 ${theme.mutedText}`}>
+                Get expert feedback on your queries from our AI SQL coaching agent
+              </p>
+            </div>
+            {isLoaded && (
+              <div className="flex items-center gap-4">
+                {/* Proficiency Score */}
+                <div className="flex flex-col items-end">
+                  <span className="text-xs text-slate-500">Proficiency</span>
+                  <span className="text-2xl font-bold text-cyan-600">
+                    {Math.round(proficiency)}%
+                  </span>
+                </div>
+                {/* Session Stats */}
+                {sessionStats.questionsAnswered > 0 && (
+                  <div className="flex flex-col items-end text-sm">
+                    <span className="text-slate-500">Session</span>
+                    <span className="font-medium text-slate-700">
+                      {sessionStats.correctCount}/{sessionStats.questionsAnswered}
+                    </span>
+                  </div>
+                )}
+                {/* Progress Bar */}
+                <div className="w-32">
+                  <SkillProgressBar progress={progress} />
+                </div>
+              </div>
+            )}
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Left Column */}
-          <div className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left Column - Skill Tree */}
+          <div className="lg:col-span-1 space-y-4">
+            {/* Skill Tree Toggle */}
+            <button
+              onClick={() => setShowSkillTree(!showSkillTree)}
+              className={`w-full flex items-center justify-between px-4 py-3 ${theme.card} ${theme.cardHover}`}
+            >
+              <span className={`text-sm font-medium ${theme.labelText}`}>
+                Skill Tree
+              </span>
+              <svg
+                className={`w-5 h-5 transition-transform ${showSkillTree ? "rotate-180" : ""} ${theme.mutedText}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {showSkillTree && isLoaded && (
+              <SkillTree progress={progress} compact />
+            )}
+
+            {/* Badges */}
+            {badges.length > 0 && (
+              <div className={`${theme.card} p-4`}>
+                <h4 className={`text-sm font-medium ${theme.labelText} mb-2`}>Badges Earned</h4>
+                <div className="flex flex-wrap gap-2">
+                  {badges.map((badgeId) => {
+                    const badge = BADGES.find((b) => b.id === badgeId);
+                    return (
+                      <span
+                        key={badgeId}
+                        className="px-2 py-1 text-xs bg-amber-100 text-amber-700 rounded-full"
+                        title={badge?.description}
+                      >
+                        {badge?.name || badgeId}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Center Column */}
+          <div className="lg:col-span-1 space-y-6">
             <TableBrowser schema={schema} />
 
             <div className={`${theme.card} ${theme.cardHover} p-4`}>
@@ -379,8 +481,24 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Column */}
-          <div>
+          {/* Right Column - Feedback */}
+          <div className="lg:col-span-1 space-y-4">
+            {/* Current Question Skills */}
+            {currentSkillIds.length > 0 && (
+              <div className={`${theme.card} p-3`}>
+                <span className={`text-xs ${theme.mutedText}`}>Skills being tested:</span>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {currentSkillIds.map((skillId) => (
+                    <span
+                      key={skillId}
+                      className="px-2 py-0.5 text-xs bg-cyan-100 text-cyan-700 rounded"
+                    >
+                      {skillId.replace(/_/g, " ")}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <FeedbackPanel response={response} error={error} loading={loading} />
           </div>
         </div>

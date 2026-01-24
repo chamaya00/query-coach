@@ -62,4 +62,8 @@ export interface CachedQuestion {
   fingerprint?: string;
   hint: string;
   generatedAt: string;
+  skillIds?: string[]; // Skill IDs this question tests (1-3 skills)
 }
+
+// Re-export skill types for convenience
+export * from "./types/skills";
